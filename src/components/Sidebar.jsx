@@ -1,10 +1,10 @@
 import { Link } from "react-router-dom";
 const Sidebar = () => {
   return (
-    <section className="relative px-5 py-5 left-0 w-60 h-[calc(100vh-6rem)] flex flex-col gap-y-5">
+    <section className="hidden md:flex relative px-5 py-5 left-0 w-56 h-[calc(100vh-6rem)] flex-col gap-y-5">
       <div>
         <h3 className="text-2xl py-2 font-semibold">Browse</h3>
-        <div className="flex flex-col gap-y-2 text-lg capitalize">
+        <div className="flex flex-col gap-y-2 text-lg capitalize font-mono">
           <Link to="browse/Songs">Songs</Link>
           <Link to="browse/albums">albums</Link>
           <Link to="browse/trending">trending</Link>
@@ -14,7 +14,7 @@ const Sidebar = () => {
       </div>
       <div>
         <h3 className="text-2xl py-2 font-semibold">My Library</h3>
-        <div className="flex flex-col gap-y-2 text-lg capitalize">
+        <div className="flex flex-col gap-y-2 text-lg capitalize font-mono">
           <Link to="library/history">history</Link>
           <Link to="library/albums">albums</Link>
           <Link to="library/podcasts">podcasts</Link>
