@@ -14,19 +14,15 @@ const initialState = {
   play: null,
 };
 
-export const homeDataFetch = createAsyncThunk(
-  "homeData",
-  async () => {
-    try {
-      const { data: resp } = await axios(homeDataFetchUrl);
-      const { data } = resp;
-      return data;
-
-    } catch (error) {
-      console.log(error.response);
-    }
+export const homeDataFetch = createAsyncThunk("homeData", async () => {
+  try {
+    const { data: resp } = await axios(homeDataFetchUrl);
+    const { data } = resp;
+    return data;
+  } catch (error) {
+    console.log(error.response);
   }
-);
+});
 
 const homeSlice = createSlice({
   name: "homeSlice",
@@ -39,6 +35,7 @@ const homeSlice = createSlice({
       })
       .addCase(homeDataFetch.fulfilled, (state, { payload }) => {
         const { albums, playlists, charts, trending } = payload;
+        console.log(albums)
         return { ...state, albums, playlists, charts, trending, data: payload };
       })
       .addCase(homeDataFetch.rejected, (state, { payload }) => {

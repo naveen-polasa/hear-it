@@ -7,9 +7,10 @@ const MusicCards = ({ data }) => {
   const dispatch = useDispatch();
 
   return (
-    <article className="flex flex-wrap shrink-0 gap-8">
+    <article className="flex justify-center flex-wrap shrink-0 gap-8">
       {data.map((item) => {
-        const { id, image, name, type, primaryArtists } = item;
+        const { id, image, name, type, primaryArtists, artists, songCount } =
+          item;
         return (
           <div key={id} className="w-44 relative">
             <div>
@@ -36,14 +37,28 @@ const MusicCards = ({ data }) => {
               <div className="py-2 text-center px-0.5 ">
                 <p className="truncate">{name}</p>
                 <p className="truncate text-xs">
-                  {primaryArtists?.map((artist, index) => {
-                    return (
-                      <span key={index} className="text-sm">
-                        {" "}
-                        {artist.name}
-                      </span>
-                    );
-                  })}
+                  {primaryArtists &&
+                    primaryArtists?.map((artist, index) => {
+                      return (
+                        <span key={index} className="text-sm">
+                          {" "}
+                          {artist.name}
+                        </span>
+                      );
+                    })}
+                  {artists &&
+                    artists?.map((artist, index) => {
+                      return (
+                        <span key={index} className="text-sm">
+                          {" "}
+                          {artist.name}
+                        </span>
+                      );
+                    })}
+                  {/* {console.log(artists)} */}
+                  {songCount > 0 && (
+                    <span className="text-sm">PlayList Songs: {songCount}</span>
+                  )}
                 </p>
               </div>
             </div>

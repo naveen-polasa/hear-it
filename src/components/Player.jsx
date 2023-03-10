@@ -88,7 +88,7 @@ const Player = () => {
   };
 
   return (
-    <section className="fixed bottom-0 h-20 bg-red-100 w-[100vw] max-w-[1440px] rounded-xl">
+    <section className="fixed bottom-0 h-20 bg-red-100 w-[100vw] max-w-[1440px] rounded-t-lg">
       <audio
         src={downloadUrl?.[0]?.link}
         ref={ref}
@@ -118,19 +118,19 @@ const Player = () => {
           ></span>
         </div>
       </div>
-      <div className="flex justify-between px-4 items-center h-20">
-        <div className="flex items-center gap-3">
+      <div className="flex justify-between px-4 items-center h-20 pb-5">
+        <div className="flex items-center gap-3 w-64">
           <img
             src={image?.[2]?.link}
             alt="image"
             className="w-12 h-12 rounded-lg"
           />
           <div>
-            <h4>{name}</h4>
-            <h5>{primaryArtists}</h5>
+            <h4 className="truncate">{name}</h4>
+            <h5 className="truncate">{primaryArtists}</h5>
           </div>
         </div>
-        <div className="flex gap-x-6">
+        <div className="flex gap-x-6 ">
           <button className={`${id !== "song" && "opacity-75"}`}>
             <GiPreviousButton size="28px" />
           </button>

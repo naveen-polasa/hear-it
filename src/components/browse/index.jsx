@@ -1,7 +1,6 @@
 import TopCharts from "./TopCharts";
 import NewReleases from "./NewReleases";
 import TopPlaylists from "./TopPlaylists";
-import Playlists from "./Playlists";
-import Albums from "./Albums";
+import TopAlbums from "./TopAlbums";
 
-export { TopCharts, NewReleases, TopPlaylists, Playlists, Albums };
+export { TopCharts, NewReleases, TopPlaylists,  TopAlbums };

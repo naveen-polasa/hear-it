@@ -1,6 +1,6 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
-import { songByIdUrl } from "../utils/constants";
+import { songByIdUrl, albumByIdUrl, playlistByIdUrl } from "../utils/constants";
 
 const initialState = {
   isPlaying: false,
@@ -13,18 +13,23 @@ const initialState = {
   isLoading: false,
   isError: false,
   id: "Hpd68_cZ",
-  type: null,
+  type: "song",
 };
 
 export const playerSongFetch = createAsyncThunk(
   "playerData",
   async (_, thunkAPI) => {
     try {
-      const { data: resp } = await axios(
-        `${songByIdUrl}${thunkAPI.getState().player.id}`
-      );
-      const { data } = resp;
-      return data;
+      console.log(thunkAPI.getState().player.type);
+      if (thunkAPI.getState().player.type === "song") {
+        const { data: resp } = await axios(
+          `${songByIdUrl}${thunkAPI.getState().player.id}`
+        );
+        const { data } = resp;
+        return data;
+      } else if (thunkAPI.getState().player.type === "album") {
+      } else if (thunkAPI.getState().player.type === "playlist") {
+      }
     } catch (error) {
       console.log(error.response);
     }
@@ -39,6 +44,7 @@ const playerSlice = createSlice({
       const { id, type } = payload;
       state.id = id;
       state.type = type;
+      // console.log(id,type)
     },
     setCurrentSong: (state, payload) => {
       state.currentSong = payload;

@@ -1,22 +1,14 @@
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import SharedLayout from "./components/SharedLayout";
 import {
-  Albums,
   NewReleases,
-  Playlists,
+  TopAlbums,
   TopCharts,
   TopPlaylists,
 } from "./components/browse";
-import {
-  History,
-  Albums as AlbumsLib,
-  Podcasts as PodcastsLib,
-  Artists as ArtistsLib,
-  Songs as SongsLib,
-} from "./components/my-library";
+import { History, Albums, Artists, Songs } from "./components/my-library";
 import Music from "./components/navbar/Music";
 import Podcasts from "./components/navbar/Podcasts";
-import Home from "./pages/Home";
 
 function App() {
   return (
@@ -25,19 +17,22 @@ function App() {
         <Router>
           <Routes>
             <Route path="/" element={<SharedLayout />}>
-              <Route index element={<Home />} />
-              <Route path="browse/new_releases" element={<NewReleases />} />
-              <Route path="browse/top_charts" element={<TopCharts />} />
-              <Route path="browse/top_playlists" element={<TopPlaylists />} />
-              <Route path="browse/playlists" element={<Playlists />} />
-              <Route path="browse/albums" element={<Albums />} />
-              <Route path="library/history" element={<History />} />
-              <Route path="library/songs" element={<SongsLib />} />
-              <Route path="library/albums" element={<AlbumsLib />} />
-              <Route path="library/podcasts" element={<PodcastsLib />} />
-              <Route path="library/artists" element={<ArtistsLib />} />
+              {/* navbar start */}
               <Route path="music" element={<Music />} />
               <Route path="podcasts" element={<Podcasts />} />
+              {/* navbar end */}
+              {/* browse start */}
+              <Route index element={<NewReleases />} />
+              <Route path="top_charts" element={<TopCharts />} />
+              <Route path="top_playlists" element={<TopPlaylists />} />
+              <Route path="top_albums" element={<TopAlbums />} />
+              {/* browse end */}
+              {/* library start */}
+              <Route path="history" element={<History />} />
+              <Route path="songs" element={<Songs />} />
+              <Route path="albums" element={<Albums />} />
+              <Route path="artists" element={<Artists />} />
+              {/* library end */}
             </Route>
           </Routes>
         </Router>
