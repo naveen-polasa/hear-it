@@ -5,14 +5,14 @@ import Profile from "./navbar/Profile";
 
 const Navbar = () => {
   return (
-    <div className="h-24 flex items-center justify-between">
+    <div className="h-20 flex items-center justify-between px-2">
       <div className="flex items-center gap-x-9">
         <div className="px-3 shrink-0">
           <Link to="/">
             <img
               src="/src/assets/logo.png"
               alt="logo"
-              className="w-28 md:w-32"
+              className="w-24 md:w-28"
             />
           </Link>
         </div>

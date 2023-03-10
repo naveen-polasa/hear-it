@@ -1,7 +1,6 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
 import { homeDataFetchUrl } from "../utils/constants";
-import { playerSongFetch } from "./playerSlice";
 
 const initialState = {
   data: [],
@@ -35,7 +34,7 @@ const homeSlice = createSlice({
       })
       .addCase(homeDataFetch.fulfilled, (state, { payload }) => {
         const { albums, playlists, charts, trending } = payload;
-        console.log(albums)
+        // console.log(albums)
         return { ...state, albums, playlists, charts, trending, data: payload };
       })
       .addCase(homeDataFetch.rejected, (state, { payload }) => {

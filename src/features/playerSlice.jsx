@@ -1,6 +1,11 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
-import { songByIdUrl, albumByIdUrl, playlistByIdUrl } from "../utils/constants";
+import {
+  baseURL,
+  songByIdUrl,
+  albumByIdUrl,
+  playlistByIdUrl,
+} from "../utils/constants";
 
 const initialState = {
   isPlaying: false,
@@ -8,28 +13,26 @@ const initialState = {
   currentTime: 0,
   progressBarWidth: 0,
   volumeBar: false,
-  currentSong: null,
   currentSongData: [],
   isLoading: false,
   isError: false,
   id: "Hpd68_cZ",
   type: "song",
+  songsList: [],
+  songNum: 0,
+  prev: null,
+  next: null,
 };
 
 export const playerSongFetch = createAsyncThunk(
   "playerData",
-  async (_, thunkAPI) => {
+  async ({ songId, type }, thunkAPI) => {
     try {
-      console.log(thunkAPI.getState().player.type);
-      if (thunkAPI.getState().player.type === "song") {
-        const { data: resp } = await axios(
-          `${songByIdUrl}${thunkAPI.getState().player.id}`
-        );
-        const { data } = resp;
-        return data;
-      } else if (thunkAPI.getState().player.type === "album") {
-      } else if (thunkAPI.getState().player.type === "playlist") {
-      }
+      // const url = `https://saavn.me/${thunkAPI.getState().player.type}s?id=${thunkAPI.getState().player.id}`;
+      const url = `https://saavn.me/${type}s?id=${songId}`;
+      const { data: resp } = await axios(url);
+      const { data } = resp;
+      return data;
     } catch (error) {
       console.log(error.response);
     }
@@ -46,9 +49,6 @@ const playerSlice = createSlice({
       state.type = type;
       // console.log(id,type)
     },
-    setCurrentSong: (state, payload) => {
-      state.currentSong = payload;
-    },
     handleIsPlaying: (state, { payload }) => {
       state.isPlaying = payload;
     },
@@ -64,6 +64,21 @@ const playerSlice = createSlice({
     setVolumeBar: (state, { payload }) => {
       state.volumeBar = payload;
     },
+    handleControls: (state, { payload }) => {
+      if (payload === "prev") {
+        state.songNum--;
+        console.log(state.songNum);
+        if (state.songNum < 0) {
+          state.songNum = state.songsList.length - 1;
+        }
+      } else if (payload === "next") {
+        state.songNum++;
+        if (state.songNum > state.songsList.length - 1) {
+          state.songNum = 0;
+        }
+      }
+      state.currentSongData = state.songsList?.[state.songNum];
+    },
   },
   extraReducers: (builder) => {
     builder
@@ -72,7 +87,29 @@ const playerSlice = createSlice({
       })
       .addCase(playerSongFetch.fulfilled, (state, { payload }) => {
         state.isLoading = false;
-        state.currentSongData = payload[0];
+        switch (state.type) {
+          case "song": {
+            // todo in singlepage
+            state.currentSongData = payload?.[0];
+            state.songsList = payload;
+            console.log(state.songsList);
+            return;
+          }
+          case "album": {
+            // todo in singlepage
+            const { songs } = payload;
+            state.songsList = songs;
+            state.currentSongData = songs?.[0];
+            return;
+          }
+          case "playlist": {
+            // todo in singlepage
+            const { songs } = payload;
+            state.songsList = songs;
+            state.currentSongData = songs?.[0];
+            return;
+          }
+        }
       })
       .addCase(playerSongFetch.rejected, (state) => {
         state.isError = true;
@@ -81,13 +118,13 @@ const playerSlice = createSlice({
 });
 
 export const {
-  setCurrentSong,
   playSong,
   handleIsPlaying,
   setProgressBarWidth,
   setVolume,
   setCurrentTime,
   setVolumeBar,
+  handleControls,
 } = playerSlice.actions;
 
 export default playerSlice.reducer;

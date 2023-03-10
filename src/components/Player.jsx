@@ -11,6 +11,7 @@ import {
   setCurrentTime,
   setVolumeBar,
   playerSongFetch,
+  handleControls,
 } from "../features/playerSlice";
 
 const Player = () => {
@@ -21,12 +22,12 @@ const Player = () => {
     currentSongData,
     id: songId,
     type,
+    songsList,
+    songNum,
   } = useSelector((store) => store.player);
 
   useEffect(() => {
-    if (type === "song") {
-      dispatch(playerSongFetch());
-    }
+    dispatch(playerSongFetch({ songId, type }));
   }, [songId, type]);
 
   const { downloadUrl, name, primaryArtists, image } = currentSongData;
@@ -126,18 +127,24 @@ const Player = () => {
             className="w-12 h-12 rounded-lg"
           />
           <div>
-            <h4 className="truncate">{name}</h4>
-            <h5 className="truncate">{primaryArtists}</h5>
+            <h4 className="truncate w-64">{name}</h4>
+            <h5 className="truncate w-64">{primaryArtists}</h5>
           </div>
         </div>
         <div className="flex gap-x-6 ">
-          <button className={`${id !== "song" && "opacity-75"}`}>
+          <button
+            onClick={() => dispatch(handleControls("prev"))}
+            className={`${songsList.length < 2 ? "opacity-75" : null}`}
+          >
             <GiPreviousButton size="28px" />
           </button>
           <button onClick={handlePlay}>
             {!isPlaying ? <FaPlay size="28px" /> : <FaPause size="28px" />}
           </button>
-          <button className={`${id !== "song" && "opacity-75"}`}>
+          <button
+            onClick={() => dispatch(handleControls("next"))}
+            className={`${songsList.length < 2 ? "opacity-75" : null}`}
+          >
             <GiNextButton size="28px" />
           </button>
         </div>

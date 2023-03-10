@@ -1,5 +1,6 @@
 export const homeDataFetchUrl =
   "https://saavn.me/modules?language=hindi,english";
+export const baseURL = "https://saavn.me/";
 export const songByIdUrl = "https://saavn.me/songs?id=";
 export const albumByIdUrl = "https://saavn.me/albums?id=";
 export const artistByIdUrl = "https://saavn.me/artists?id=568707";

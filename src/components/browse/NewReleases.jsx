@@ -12,7 +12,7 @@ const NewReleases = () => {
   // playlists => top playlists
   // charts => top charts
   // trending/albums => top albums
-  console.log(trending);
+  // console.log(trending);
 
   const dispatch = useDispatch();
   useEffect(() => {
@@ -22,7 +22,7 @@ const NewReleases = () => {
 
   return (
     <section>
-      <h3 className="py-6 text-2xl font-semibold">New Songs</h3>
+      <h3 className="py-6 px-8 text-2xl font-semibold">New Songs</h3>
       <MusicCards data={albums} />
     </section>
   );
