@@ -1,8 +1,14 @@
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import SharedLayout from "./components/SharedLayout";
-import { Albums, Playlists, Songs, Trending } from "./components/browse";
 import {
-  History as HistoryLib,
+  Albums,
+  NewReleases,
+  Playlists,
+  TopCharts,
+  TopPlaylists,
+} from "./components/browse";
+import {
+  History,
   Albums as AlbumsLib,
   Podcasts as PodcastsLib,
   Artists as ArtistsLib,
@@ -10,6 +16,7 @@ import {
 } from "./components/my-library";
 import Music from "./components/navbar/Music";
 import Podcasts from "./components/navbar/Podcasts";
+import Home from "./pages/Home";
 
 function App() {
   return (
@@ -18,16 +25,17 @@ function App() {
         <Router>
           <Routes>
             <Route path="/" element={<SharedLayout />}>
-              <Route path="browse/songs" element={<Songs />} />
-              <Route path="browse/albums" element={<Albums />} />
-              <Route path="browse/trending" element={<Trending />} />
+              <Route index element={<Home />} />
+              <Route path="browse/new_releases" element={<NewReleases />} />
+              <Route path="browse/top_charts" element={<TopCharts />} />
+              <Route path="browse/top_playlists" element={<TopPlaylists />} />
               <Route path="browse/playlists" element={<Playlists />} />
-              <Route path="browse/charts" element={<Trending />} />
-              <Route path="library/history" element={<HistoryLib />} />
+              <Route path="browse/albums" element={<Albums />} />
+              <Route path="library/history" element={<History />} />
+              <Route path="library/songs" element={<SongsLib />} />
               <Route path="library/albums" element={<AlbumsLib />} />
               <Route path="library/podcasts" element={<PodcastsLib />} />
               <Route path="library/artists" element={<ArtistsLib />} />
-              <Route path="library/songs" element={<SongsLib />} />
               <Route path="music" element={<Music />} />
               <Route path="podcasts" element={<Podcasts />} />
             </Route>

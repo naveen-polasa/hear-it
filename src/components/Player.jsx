@@ -3,53 +3,51 @@ import { FaPause, FaPlay, FaVolumeUp, FaVolumeMute } from "react-icons/fa";
 import { GiPreviousButton, GiNextButton } from "react-icons/gi";
 import { SlOptions } from "react-icons/sl";
 import { formatTime } from "../utils/utilFunctions";
+
 const Player = () => {
-  const [play, setPlay] = useState(true);
-  const [volume, setVolume] = useState(1);
   const [isPlaying, setIsPlaying] = useState(false);
+  const [volume, setVolume] = useState(1);
   const [currentTime, setCurrentTime] = useState(0);
-  const [progressBarWidth, setProgressBarWidth] = useState(1);
+  const [progressBarWidth, setProgressBarWidth] = useState(0);
   const [volumeBar, setVolumeBar] = useState(false);
-  const audio = useRef();
+  const [mousedown, setMouseDown] = useState(false);
+  const ref = useRef(null);
 
   useEffect(() => {
     if (!isPlaying) return;
     const interval = setInterval(() => {
-      let time = Math.floor(audio.current?.currentTime);
+      let time = Math.floor(ref.current?.currentTime);
       setCurrentTime(time);
     }, 1000);
     return () => clearTimeout(interval);
   }, [isPlaying]);
 
-  useEffect(() => {}, [currentTime]);
-
   const handlePlay = () => {
-    setPlay(!play);
-    if (play) {
-      audio.current.play();
-      setIsPlaying(true);
+    setIsPlaying(!isPlaying);
+    if (!isPlaying) {
+      ref.current.play();
       return;
+    } else {
+      ref.current.pause();
     }
-    setIsPlaying(false);
-    audio.current.pause();
   };
 
   useEffect(() => {
     if (currentTime < 1) return;
-    const totalTime = audio.current?.duration;
+    const totalTime = ref.current?.duration;
     const percentage = ((currentTime / Math.floor(totalTime)) * 100).toFixed(8);
     setProgressBarWidth(percentage);
   }, [currentTime]);
 
-  const handleMouseDown = (e) => {
+  const handleMouseDown = (e, flag) => {
+    if (flag && !e.target.classList.contains("progress")) return;
     const currentPoint = e.clientX - e.target.getBoundingClientRect().left;
     const totalWidth = e.currentTarget.clientWidth;
     let percentage = ((currentPoint / totalWidth) * 100).toFixed(8);
     if (percentage > 100) percentage = 100;
-    const newTime = Math.floor((percentage / 100) * audio.current.duration);
+    const newTime = Math.floor((percentage / 100) * ref.current.duration);
     setCurrentTime(newTime);
-    audio.current.currentTime = newTime;
-
+    ref.current.currentTime = newTime;
     setProgressBarWidth(percentage);
   };
 
@@ -64,35 +62,54 @@ const Player = () => {
     if (e.target.classList.contains("input")) return;
     if (volume > 0) {
       setVolume(0);
-      audio.current.muted = true;
+      ref.current.muted = true;
       return;
     } else setVolume(1);
-    audio.current.muted = false;
+    ref.current.muted = false;
   };
   const handleVolumeChange = (e) => {
     setVolume(e.target.value);
-    audio.current["volume"] = volume;
+    ref.current["volume"] = volume;
   };
 
   return (
-    <section className="fixed bottom-0 h-20 bg-red-200 w-[100vw] max-w-[1440px]">
+    <section className="fixed bottom-0 h-20 bg-red-100 w-[100vw] max-w-[1440px] rounded-xl">
       <audio
         src="../src/assets/test.mp3"
-        ref={audio}
+        ref={ref}
+        type="audio/mp3"
         preload="metadata"
-        className=""
       ></audio>
-      <div onClick={handleMouseDown} className="w-[100%]">
+      <div
+        onClick={(e) => {
+          handleMouseDown(e, true);
+        }}
+        onMouseMove={(e) => {
+          if (mousedown && e.target.classList.contains("progress")) {
+            handleMouseDown(e, false);
+          }
+        }}
+        onMouseDown={() => setMouseDown(true)}
+        onMouseLeave={() => setMouseDown(false)}
+        className="w-[99.2%] progress border-t-[5px] border-red-300 relative mx-auto"
+      >
         <div
           style={{ width: `${progressBarWidth}%` }}
-          className="relative border-t-[5px] border-t-red-400"
+          className="relative -top-1 border-t-[5px] border-t-red-500"
         >
-          <span className="absolute -top-2.5 -right-3 w-4 h-4 rounded-full bg-red-800"></span>
+          <span
+            className="absolute -top-2.5 -right-3 w-4 h-4 hover:scale-110 rounded-full bg-red-800 "
+            onMouseUp={() => setMouseDown(false)}
+          ></span>
         </div>
       </div>
       <div className="flex justify-between px-4 items-center h-20">
         <div className="flex items-center gap-3">
-          <img src="../src/assets/logo.png" alt="image" className="w-12 h-12 rounded-lg" />
+          <img
+            src="../src/assets/logo.png"
+            alt="image"
+            className="w-12 h-12 rounded-lg"
+          />
           <div>
             <h4>Hey Mama</h4>
             <h5>artists</h5>
@@ -103,7 +120,7 @@ const Player = () => {
             <GiPreviousButton size="28px" />
           </button>
           <button onClick={handlePlay}>
-            {play ? <FaPlay size="28px" /> : <FaPause size="28px" />}
+            {!isPlaying ? <FaPlay size="28px" /> : <FaPause size="28px" />}
           </button>
           <button>
             <GiNextButton size="28px" />
@@ -112,9 +129,9 @@ const Player = () => {
         <div className="flex items-center gap-x-6 px-4">
           <span>
             <span>
-              {formatTime(Math.floor(audio.current?.currentTime || 0))}{" "}
+              {formatTime(Math.floor(ref.current?.currentTime || 0))}{" "}
             </span>
-            /<span>{formatTime(Math.floor(audio.current?.duration || 0))}</span>
+            /<span>{formatTime(Math.floor(ref.current?.duration || 0))}</span>
           </span>
           <button>
             <SlOptions size="28px" />

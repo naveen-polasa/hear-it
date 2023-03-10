@@ -1,7 +1,7 @@
-import Albums from "./Albums";
-import Charts from "./Charts";
+import TopCharts from "./TopCharts";
+import NewReleases from "./NewReleases";
+import TopPlaylists from "./TopPlaylists";
 import Playlists from "./Playlists";
-import Songs from "./Songs";
-import Trending from "./Trending";
+import Albums from "./Albums";
 
-export { Albums, Charts, Playlists, Songs, Trending };
+export { TopCharts, NewReleases, TopPlaylists, Playlists, Albums };
