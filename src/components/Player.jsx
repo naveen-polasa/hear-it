@@ -190,7 +190,7 @@ const Player = () => {
                     <p>{url.quality}</p>
                     <span>
                       <a href={url.link}>
-                        <HiDownload size="24px" />
+                        <HiDownload size="24px" className="hover:scale-125 duration-200" />
                       </a>
                     </span>
                   </div>

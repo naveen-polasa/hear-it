@@ -5,13 +5,9 @@ import { playerSongFetch } from "../../features/playerSlice";
 import { homeDataFetch } from "../../features/homeSlice";
 
 const TopAlbums = () => {
-  const { data, trending } = useSelector((store) => store.home);
-  // console.log(albums, playlists, charts, trending);
-  // playlists => top playlists
-  // charts => top charts
-  // trending/albums => top albums
-  // console.log(trending);
+  const { trending } = useSelector((store) => store.home);
   const { songs, albums } = trending;
+  
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(homeDataFetch());

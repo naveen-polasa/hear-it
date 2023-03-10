@@ -95,7 +95,6 @@ const playerSlice = createSlice({
             // todo in singlepage
             state.currentSongData = payload?.[0];
             state.songsList = payload;
-            console.log(state.songsList);
             return;
           }
           case "album": {

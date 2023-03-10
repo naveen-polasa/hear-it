@@ -5,14 +5,7 @@ import { homeDataFetch } from "../../features/homeSlice";
 import MusicChartCard from "../MusicChartCard";
 
 const TopCharts = () => {
-  const { data, albums, playlists, charts, trending } = useSelector(
-    (store) => store.home
-  );
-  // console.log(albums, playlists, charts, trending);
-  // playlists => top playlists
-  // charts => top charts
-  // trending/albums => top albums
-  // console.log(trending);
+  const { charts } = useSelector((store) => store.home);
 
   const dispatch = useDispatch();
   useEffect(() => {
