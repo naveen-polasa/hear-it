@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import MusicCards from "../MusicCards";
+import MusicCard from "../MusicCard";
 import { homeDataFetch } from "../../features/homeSlice";
 import { playerSongFetch } from "../../features/playerSlice";
 
@@ -23,7 +23,7 @@ const NewReleases = () => {
   return (
     <section>
       <h3 className="py-6 px-8 text-2xl font-semibold">New Songs</h3>
-      <MusicCards data={albums} />
+      <MusicCard data={albums} />
     </section>
   );
 };

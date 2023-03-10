@@ -12,7 +12,7 @@ const SharedLayout = () => {
       </div>
       <div
         className="absolute top-0 md:ml-60 mt-20 p-2 h-[calc(100vh-5rem)] py-3 2xl:w-[calc(100%-20rem)] 
-     max-w-[75rem] pb-20 overflow-y-scroll"
+     max-w-[75rem] pb-24 overflow-y-scroll"
       >
         <Outlet />
       </div>

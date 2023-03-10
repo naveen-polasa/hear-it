@@ -5,3 +5,8 @@ export const formatTime = (secs) => {
   if (seconds < 10) seconds = `0${seconds}`;
   return `${minutes}:${seconds}`;
 };
+
+export const formatName = (name) => {
+  if (!name) return;
+  return name.replaceAll("&quot;", '"');
+};

@@ -1,15 +1,23 @@
 import { useEffect, useRef, useState } from "react";
-import { FaPause, FaPlay, FaVolumeUp, FaVolumeMute } from "react-icons/fa";
+import {
+  FaPause,
+  FaPlay,
+  FaVolumeUp,
+  FaVolumeMute,
+  FaDownload,
+} from "react-icons/fa";
+import { HiDownload } from "react-icons/hi";
 import { GiPreviousButton, GiNextButton } from "react-icons/gi";
 import { SlOptions } from "react-icons/sl";
 import { useDispatch, useSelector } from "react-redux";
-import { formatTime } from "../utils/utilFunctions";
+import { formatName, formatTime } from "../utils/utilFunctions";
 import {
   handleIsPlaying,
   setProgressBarWidth,
   setVolume,
   setCurrentTime,
   setVolumeBar,
+  setDownload,
   playerSongFetch,
   handleControls,
 } from "../features/playerSlice";
@@ -24,16 +32,20 @@ const Player = () => {
     type,
     songsList,
     songNum,
+    isPlaying,
+    volume,
+    currentTime,
+    progressBarWidth,
+    volumeBar,
+    download,
   } = useSelector((store) => store.player);
+  const dispatch = useDispatch();
 
   useEffect(() => {
     dispatch(playerSongFetch({ songId, type }));
   }, [songId, type]);
 
   const { downloadUrl, name, primaryArtists, image } = currentSongData;
-  const { isPlaying, volume, currentTime, progressBarWidth, volumeBar, id } =
-    useSelector((store) => store.player);
-  const dispatch = useDispatch();
 
   useEffect(() => {
     if (!isPlaying) return;
@@ -91,7 +103,7 @@ const Player = () => {
   return (
     <section className="fixed bottom-0 h-20 bg-red-100 w-[100vw] max-w-[1440px] rounded-t-lg">
       <audio
-        src={downloadUrl?.[0]?.link}
+        src={downloadUrl?.[1]?.link}
         ref={ref}
         type="audio/mp3"
         preload="metadata"
@@ -107,7 +119,7 @@ const Player = () => {
         }}
         onMouseDown={() => setMouseDown(true)}
         onMouseLeave={() => setMouseDown(false)}
-        className="w-[99.2%] progress border-t-[5px] border-red-300 relative mx-auto"
+        className="w-[99.6%] progress border-t-[5px] border-red-300 relative mx-auto"
       >
         <div
           style={{ width: `${progressBarWidth}%` }}
@@ -127,8 +139,8 @@ const Player = () => {
             className="w-12 h-12 rounded-lg"
           />
           <div>
-            <h4 className="truncate w-64">{name}</h4>
-            <h5 className="truncate w-64">{primaryArtists}</h5>
+            <h4 className="truncate w-64">{formatName(name)}</h4>
+            <h5 className="truncate w-64">{formatName(primaryArtists)}</h5>
           </div>
         </div>
         <div className="flex gap-x-6 ">
@@ -157,6 +169,34 @@ const Player = () => {
           </span>
           <button>
             <SlOptions size="28px" />
+          </button>
+          <button
+            className="relative"
+            onMouseOver={() => dispatch(setDownload(true))}
+            onMouseLeave={() => dispatch(setDownload(false))}
+          >
+            <FaDownload size="26px" />
+            <div
+              className={`absolute ${
+                download ? "block" : "hidden"
+              } bottom-6 -left-12 bg-green-50 p-2 border rounded-lg`}
+            >
+              {downloadUrl?.map((url) => {
+                return (
+                  <div
+                    key={url.quality}
+                    className="flex gap-x-4 w-[6.5rem] my-2 justify-between border rounded-lg p-0.5"
+                  >
+                    <p>{url.quality}</p>
+                    <span>
+                      <a href={url.link}>
+                        <HiDownload size="24px" />
+                      </a>
+                    </span>
+                  </div>
+                );
+              })}
+            </div>
           </button>
           <button
             onClick={handleVolume}

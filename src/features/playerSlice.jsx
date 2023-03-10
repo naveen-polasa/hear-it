@@ -13,6 +13,7 @@ const initialState = {
   currentTime: 0,
   progressBarWidth: 0,
   volumeBar: false,
+  download: false,
   currentSongData: [],
   isLoading: false,
   isError: false,
@@ -47,7 +48,6 @@ const playerSlice = createSlice({
       const { id, type } = payload;
       state.id = id;
       state.type = type;
-      // console.log(id,type)
     },
     handleIsPlaying: (state, { payload }) => {
       state.isPlaying = payload;
@@ -63,6 +63,9 @@ const playerSlice = createSlice({
     },
     setVolumeBar: (state, { payload }) => {
       state.volumeBar = payload;
+    },
+    setDownload: (state, { payload }) => {
+      state.download = payload;
     },
     handleControls: (state, { payload }) => {
       if (payload === "prev") {
@@ -123,7 +126,7 @@ export const {
   setProgressBarWidth,
   setVolume,
   setCurrentTime,
-  setVolumeBar,
+  setVolumeBar,setDownload,
   handleControls,
 } = playerSlice.actions;
 
