@@ -2,28 +2,50 @@ import { useEffect, useRef, useState } from "react";
 import { FaPause, FaPlay, FaVolumeUp, FaVolumeMute } from "react-icons/fa";
 import { GiPreviousButton, GiNextButton } from "react-icons/gi";
 import { SlOptions } from "react-icons/sl";
+import { useDispatch, useSelector } from "react-redux";
 import { formatTime } from "../utils/utilFunctions";
+import {
+  handleIsPlaying,
+  setProgressBarWidth,
+  setVolume,
+  setCurrentTime,
+  setVolumeBar,
+  playerSongFetch,
+} from "../features/playerSlice";
 
 const Player = () => {
-  const [isPlaying, setIsPlaying] = useState(false);
-  const [volume, setVolume] = useState(1);
-  const [currentTime, setCurrentTime] = useState(0);
-  const [progressBarWidth, setProgressBarWidth] = useState(0);
-  const [volumeBar, setVolumeBar] = useState(false);
   const [mousedown, setMouseDown] = useState(false);
   const ref = useRef(null);
 
+  const {
+    currentSongData,
+    id: songId,
+    type,
+  } = useSelector((store) => store.player);
+
+  useEffect(() => {
+    if (type === "song") {
+      dispatch(playerSongFetch());
+    }
+  }, [songId, type]);
+
+  const { downloadUrl, name, primaryArtists, image } = currentSongData;
+  const { isPlaying, volume, currentTime, progressBarWidth, volumeBar, id } =
+    useSelector((store) => store.player);
+  const dispatch = useDispatch();
+
   useEffect(() => {
     if (!isPlaying) return;
+    ref.current.play();
     const interval = setInterval(() => {
       let time = Math.floor(ref.current?.currentTime);
-      setCurrentTime(time);
+      dispatch(setCurrentTime(time));
     }, 1000);
     return () => clearTimeout(interval);
-  }, [isPlaying]);
+  }, [isPlaying, currentSongData]);
 
   const handlePlay = () => {
-    setIsPlaying(!isPlaying);
+    dispatch(handleIsPlaying(!isPlaying));
     if (!isPlaying) {
       ref.current.play();
       return;
@@ -36,7 +58,7 @@ const Player = () => {
     if (currentTime < 1) return;
     const totalTime = ref.current?.duration;
     const percentage = ((currentTime / Math.floor(totalTime)) * 100).toFixed(8);
-    setProgressBarWidth(percentage);
+    dispatch(setProgressBarWidth(percentage));
   }, [currentTime]);
 
   const handleMouseDown = (e, flag) => {
@@ -46,36 +68,29 @@ const Player = () => {
     let percentage = ((currentPoint / totalWidth) * 100).toFixed(8);
     if (percentage > 100) percentage = 100;
     const newTime = Math.floor((percentage / 100) * ref.current.duration);
-    setCurrentTime(newTime);
+    dispatch(setCurrentTime(newTime));
     ref.current.currentTime = newTime;
-    setProgressBarWidth(percentage);
-  };
-
-  const handleMouseOver = () => {
-    setVolumeBar(true);
-  };
-  const handleMouseLeave = () => {
-    setVolumeBar(false);
+    dispatch(setProgressBarWidth(percentage));
   };
 
   const handleVolume = (e) => {
     if (e.target.classList.contains("input")) return;
     if (volume > 0) {
-      setVolume(0);
+      dispatch(setVolume(0));
       ref.current.muted = true;
       return;
-    } else setVolume(1);
+    } else dispatch(setVolume(1));
     ref.current.muted = false;
   };
   const handleVolumeChange = (e) => {
-    setVolume(e.target.value);
+    dispatch(setVolume(e.target.value));
     ref.current["volume"] = volume;
   };
 
   return (
     <section className="fixed bottom-0 h-20 bg-red-100 w-[100vw] max-w-[1440px] rounded-xl">
       <audio
-        src="../src/assets/test.mp3"
+        src={downloadUrl?.[0]?.link}
         ref={ref}
         type="audio/mp3"
         preload="metadata"
@@ -106,23 +121,23 @@ const Player = () => {
       <div className="flex justify-between px-4 items-center h-20">
         <div className="flex items-center gap-3">
           <img
-            src="../src/assets/logo.png"
+            src={image?.[2]?.link}
             alt="image"
             className="w-12 h-12 rounded-lg"
           />
           <div>
-            <h4>Hey Mama</h4>
-            <h5>artists</h5>
+            <h4>{name}</h4>
+            <h5>{primaryArtists}</h5>
           </div>
         </div>
         <div className="flex gap-x-6">
-          <button>
+          <button className={`${id !== "song" && "opacity-75"}`}>
             <GiPreviousButton size="28px" />
           </button>
           <button onClick={handlePlay}>
             {!isPlaying ? <FaPlay size="28px" /> : <FaPause size="28px" />}
           </button>
-          <button>
+          <button className={`${id !== "song" && "opacity-75"}`}>
             <GiNextButton size="28px" />
           </button>
         </div>
@@ -131,15 +146,15 @@ const Player = () => {
             <span>
               {formatTime(Math.floor(ref.current?.currentTime || 0))}{" "}
             </span>
-            /<span>{formatTime(Math.floor(ref.current?.duration || 0))}</span>
+            / <span>{formatTime(Math.floor(ref.current?.duration || 0))}</span>
           </span>
           <button>
             <SlOptions size="28px" />
           </button>
           <button
             onClick={handleVolume}
-            onMouseOver={handleMouseOver}
-            onMouseLeave={handleMouseLeave}
+            onMouseOver={() => dispatch(setVolumeBar(true))}
+            onMouseLeave={() => dispatch(setVolumeBar(false))}
             className="relative"
           >
             <div

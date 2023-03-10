@@ -1,7 +1,8 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
+import { homeDataFetchUrl } from "../utils/constants";
+import { playerSongFetch } from "./playerSlice";
 
-const url = "https://saavn.me/modules?language=hindi,english";
 const initialState = {
   data: [],
   albums: [],
@@ -13,15 +14,19 @@ const initialState = {
   play: null,
 };
 
-export const homeDataFetch = createAsyncThunk("homeData", async () => {
-  try {
-    const { data: resp } = await axios(url);
-    const { data } = resp;
-    return data;
-  } catch (error) {
-    console.log(error.response);
+export const homeDataFetch = createAsyncThunk(
+  "homeData",
+  async () => {
+    try {
+      const { data: resp } = await axios(homeDataFetchUrl);
+      const { data } = resp;
+      return data;
+
+    } catch (error) {
+      console.log(error.response);
+    }
   }
-});
+);
 
 const homeSlice = createSlice({
   name: "homeSlice",
