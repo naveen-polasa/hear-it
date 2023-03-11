@@ -5,6 +5,7 @@ import {
   FaDownload,
   FaPlay,
   FaRegHeart,
+  FaHome,
 } from "react-icons/fa";
 
 import { HiDownload } from "react-icons/hi";
@@ -24,4 +25,5 @@ export {
   SlOptions,
   FaRegHeart,
   BsDot,
+  FaHome,
 };

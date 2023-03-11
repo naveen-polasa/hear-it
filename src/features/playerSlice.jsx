@@ -82,6 +82,10 @@ const playerSlice = createSlice({
       }
       state.currentSongData = state.songsList?.[state.songNum];
     },
+    setSongNum: (state, { payload }) => {
+      state.songNum = payload;
+      state.currentSongData = state.songsList[state.songNum];
+    },
   },
   extraReducers: (builder) => {
     builder
@@ -124,6 +128,7 @@ export const {
   setVolumeBar,
   setDownload,
   handleControls,
+  setSongNum,
 } = playerSlice.actions;
 
 export default playerSlice.reducer;
