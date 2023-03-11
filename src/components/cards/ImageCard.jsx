@@ -1,14 +1,25 @@
 import { FaPlay, FaRegHeart, SlOptions } from "../../utils/icons";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import {
   handleIsPlaying,
   playSong,
-  openSinglePage,
 } from "../../features/playerSlice";
+import { useNavigate } from "react-router-dom";
 
 const ImageCard = ({ item, width, height }) => {
   const { id, image, name, type } = item;
+  const { singlePage } = useSelector((store) => store.player);
   const dispatch = useDispatch();
+  // console.log(singlePage);
+
+  const navigate = useNavigate();
+
+  const handleClick = (e) => {
+    if (!e.target.classList.contains("image")) return;
+    const path = `${type}/${id}`;
+    navigate(path);
+  };
+
   return (
     <div>
       <img
@@ -19,10 +30,10 @@ const ImageCard = ({ item, width, height }) => {
       />
       <div
         style={{ height: `${height}rem` }}
-        className={`opacity-0 hover:opacity-100 w-${width} absolute top-0 left-0 flex justify-center items-center bg-black rounded-xl bg-opacity-40 duration-700`}
-        onClick={() => {
+        className={`opacity-0 hover:opacity-100 w-${width} absolute top-0 left-0 flex justify-center items-center bg-black rounded-xl bg-opacity-40 duration-700 image`}
+        onClick={(e) => {
           dispatch(playSong({ id, type }));
-          dispatch(openSinglePage());
+          handleClick(e);
         }}
       >
         <span

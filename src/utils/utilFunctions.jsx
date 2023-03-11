@@ -9,5 +9,6 @@ export const formatTime = (secs) => {
 export const formatName = (name) => {
   if (!name) return;
   name = name.replaceAll("&#039;", "'");
+  name = name.replaceAll("&amp;", "&");
   return name.replaceAll("&quot;", '"');
 };

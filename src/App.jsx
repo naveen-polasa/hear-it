@@ -9,6 +9,9 @@ import {
   MyAlbums,
   MyPlaylist,
   MySongs,
+  Song,
+  Album,
+  Playlist,
 } from "./pages";
 import { Music, Podcasts } from "./components/navbar";
 
@@ -26,8 +29,12 @@ function App() {
               {/* browse start */}
               <Route index element={<NewReleases />} />
               <Route path="top_charts" element={<TopCharts />} />
+              <Route path="top_charts/playlist/:id" element={<Playlist />} />
               <Route path="top_playlists" element={<TopPlaylists />} />
+              <Route path="top_playlists/playlist/:id" element={<Playlist />} />
               <Route path="top_albums" element={<TopAlbums />} />
+              <Route path="top_albums/album/:id" element={<Album />} />
+
               {/* browse end */}
               {/* library start */}
               <Route path="history" element={<History />} />
@@ -36,9 +43,9 @@ function App() {
               <Route path="playlists" element={<MyPlaylist />} />
               {/* library end */}
               {/* single pages start */}
-              <Route path="song/:id" element={<TopAlbums />} />
-              <Route path="album/:id" element={<TopAlbums />} />
-              <Route path="playlist/:id" element={<TopAlbums />} />
+              <Route path="song/:id" element={<Song />} />
+              <Route path="album/:id" element={<Album />} />
+              <Route path="playlist/:id" element={<Playlist />} />
               {/* single pages end */}
             </Route>
           </Routes>

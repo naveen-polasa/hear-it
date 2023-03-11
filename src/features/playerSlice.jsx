@@ -1,5 +1,6 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
+import { Link } from "react-router-dom";
 import {
   baseURL,
   songByIdUrl,
@@ -23,7 +24,6 @@ const initialState = {
   songNum: 0,
   prev: null,
   next: null,
-  singlePage: false,
 };
 
 export const playerSongFetch = createAsyncThunk(
@@ -83,11 +83,6 @@ const playerSlice = createSlice({
       }
       state.currentSongData = state.songsList?.[state.songNum];
     },
-    openSinglePage: (state) => {
-      state.singlePage = true;
-      console.log(state.singlePage);
-      console.log(state.id, state.type);
-    },
   },
   extraReducers: (builder) => {
     builder
@@ -134,7 +129,6 @@ export const {
   setVolumeBar,
   setDownload,
   handleControls,
-  openSinglePage,
 } = playerSlice.actions;
 
 export default playerSlice.reducer;
