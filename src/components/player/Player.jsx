@@ -1,27 +1,15 @@
 import { useEffect, useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { formatName, formatTime } from "../utils/utilFunctions";
-import {
-  FaPause,
-  FaPlay,
-  FaVolumeUp,
-  FaVolumeMute,
-  FaDownload,
-  HiDownload,
-  GiPreviousButton,
-  GiNextButton,
-  SlOptions,
-} from "../utils/icons";
+import { formatTime } from "../../utils/utilFunctions";
+import { SlOptions } from "../../utils/icons";
 import {
   handleIsPlaying,
   setProgressBarWidth,
   setVolume,
   setCurrentTime,
-  setVolumeBar,
-  setDownload,
   playerSongFetch,
-  handleControls,
-} from "../features/playerSlice";
+} from "../../features/playerSlice";
+import { SongDetails, SongControls, Download, Volume } from "./index";
 
 const Player = () => {
   const [mousedown, setMouseDown] = useState(false);
@@ -32,13 +20,10 @@ const Player = () => {
     id: songId,
     type,
     songsList,
-    songNum,
     isPlaying,
     volume,
     currentTime,
     progressBarWidth,
-    volumeBar,
-    download,
   } = useSelector((store) => store.player);
   const dispatch = useDispatch();
 
@@ -133,34 +118,12 @@ const Player = () => {
         </div>
       </div>
       <div className="flex justify-between px-4 items-center h-20 pb-5">
-        <div className="flex items-center gap-3 w-64">
-          <img
-            src={image?.[2]?.link}
-            alt="image"
-            className="w-12 h-12 rounded-lg"
-          />
-          <div>
-            <h4 className="truncate w-64">{formatName(name)}</h4>
-            <h5 className="truncate w-64">{formatName(primaryArtists)}</h5>
-          </div>
-        </div>
-        <div className="flex gap-x-6 ">
-          <button
-            onClick={() => dispatch(handleControls("prev"))}
-            className={`${songsList.length < 2 ? "opacity-75" : null}`}
-          >
-            <GiPreviousButton size="28px" />
-          </button>
-          <button onClick={handlePlay}>
-            {!isPlaying ? <FaPlay size="28px" /> : <FaPause size="28px" />}
-          </button>
-          <button
-            onClick={() => dispatch(handleControls("next"))}
-            className={`${songsList.length < 2 ? "opacity-75" : null}`}
-          >
-            <GiNextButton size="28px" />
-          </button>
-        </div>
+        <SongDetails
+          name={name}
+          primaryArtists={primaryArtists}
+          image={image}
+        />
+        <SongControls songsList={songsList} handlePlay={handlePlay} />
         <div className="flex items-center gap-x-6 px-4">
           <span>
             <span>
@@ -171,61 +134,11 @@ const Player = () => {
           <button>
             <SlOptions size="28px" />
           </button>
-          <button
-            className="relative"
-            onMouseOver={() => dispatch(setDownload(true))}
-            onMouseLeave={() => dispatch(setDownload(false))}
-          >
-            <FaDownload size="26px" />
-            <div
-              className={`absolute ${
-                download ? "block" : "hidden"
-              } bottom-6 -left-12 bg-green-50 p-2 border rounded-lg`}
-            >
-              {downloadUrl?.map((url) => {
-                return (
-                  <div
-                    key={url.quality}
-                    className="flex gap-x-4 w-[6.5rem] my-2 justify-between border rounded-lg p-0.5"
-                  >
-                    <p>{url.quality}</p>
-                    <span>
-                      <a href={url.link} target="_blank">
-                        <HiDownload
-                          size="24px"
-                          className="hover:scale-125 duration-200"
-                        />
-                      </a>
-                    </span>
-                  </div>
-                );
-              })}
-            </div>
-          </button>
-          <button
-            onClick={handleVolume}
-            onMouseOver={() => dispatch(setVolumeBar(true))}
-            onMouseLeave={() => dispatch(setVolumeBar(false))}
-            className="relative"
-          >
-            <div
-              className={`absolute ${
-                volumeBar ? "flex" : "hidden"
-              }  bottom-[5.4rem] -left-16 pl-4 pr-2 py-1 border-2 rounded-xl bg-green-50 -rotate-90 `}
-            >
-              <input
-                type="range"
-                name="volume"
-                min="0"
-                max="1"
-                step="0.05"
-                value={volume}
-                className="h-7 input"
-                onChange={handleVolumeChange}
-              />
-            </div>
-            {volume ? <FaVolumeUp size="28px" /> : <FaVolumeMute size="28px" />}
-          </button>
+          <Download downloadUrl={downloadUrl} />
+          <Volume
+            handleVolume={handleVolume}
+            handleVolumeChange={handleVolumeChange}
+          />
         </div>
       </div>
     </section>
