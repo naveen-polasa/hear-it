@@ -23,6 +23,7 @@ const initialState = {
   songNum: 0,
   prev: null,
   next: null,
+  singlePage: false,
 };
 
 export const playerSongFetch = createAsyncThunk(
@@ -82,6 +83,11 @@ const playerSlice = createSlice({
       }
       state.currentSongData = state.songsList?.[state.songNum];
     },
+    openSinglePage: (state) => {
+      state.singlePage = true;
+      console.log(state.singlePage);
+      console.log(state.id, state.type);
+    },
   },
   extraReducers: (builder) => {
     builder
@@ -125,8 +131,10 @@ export const {
   setProgressBarWidth,
   setVolume,
   setCurrentTime,
-  setVolumeBar,setDownload,
+  setVolumeBar,
+  setDownload,
   handleControls,
+  openSinglePage,
 } = playerSlice.actions;
 
 export default playerSlice.reducer;

@@ -1,6 +1,10 @@
 import { FaPlay, FaRegHeart, SlOptions } from "../../utils/icons";
 import { useDispatch } from "react-redux";
-import { handleIsPlaying, playSong } from "../../features/playerSlice";
+import {
+  handleIsPlaying,
+  playSong,
+  openSinglePage,
+} from "../../features/playerSlice";
 
 const ImageCard = ({ item, width, height }) => {
   const { id, image, name, type } = item;
@@ -16,6 +20,10 @@ const ImageCard = ({ item, width, height }) => {
       <div
         style={{ height: `${height}rem` }}
         className={`opacity-0 hover:opacity-100 w-${width} absolute top-0 left-0 flex justify-center items-center bg-black rounded-xl bg-opacity-40 duration-700`}
+        onClick={() => {
+          dispatch(playSong({ id, type }));
+          dispatch(openSinglePage());
+        }}
       >
         <span
           className="h-12 w-12 hover:h-14 hover:w-14 duration-300 bg-black opacity-70 rounded-full flex items-center justify-center"

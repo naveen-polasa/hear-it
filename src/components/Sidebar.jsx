@@ -17,7 +17,7 @@ const Sidebar = () => {
           <Link to="history">history</Link>
           <Link to="songs">songs</Link>
           <Link to="albums">albums</Link>
-          <Link to="artists">artists</Link>
+          <Link to="playlists">playlists</Link>
         </div>
       </div>
       <div>

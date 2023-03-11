@@ -5,10 +5,12 @@ import {
   TopAlbums,
   TopCharts,
   TopPlaylists,
-} from "./pages/browse";
-import { History, Albums, Artists, Songs } from "./pages/my-library";
-import Music from "./components/navbar/Music";
-import Podcasts from "./components/navbar/Podcasts";
+  History,
+  MyAlbums,
+  MyPlaylist,
+  MySongs,
+} from "./pages";
+import { Music, Podcasts } from "./components/navbar";
 
 function App() {
   return (
@@ -29,10 +31,15 @@ function App() {
               {/* browse end */}
               {/* library start */}
               <Route path="history" element={<History />} />
-              <Route path="songs" element={<Songs />} />
-              <Route path="albums" element={<Albums />} />
-              <Route path="artists" element={<Artists />} />
+              <Route path="songs" element={<MySongs />} />
+              <Route path="albums" element={<MyAlbums />} />
+              <Route path="playlists" element={<MyPlaylist />} />
               {/* library end */}
+              {/* single pages start */}
+              <Route path="song/:id" element={<TopAlbums />} />
+              <Route path="album/:id" element={<TopAlbums />} />
+              <Route path="playlist/:id" element={<TopAlbums />} />
+              {/* single pages end */}
             </Route>
           </Routes>
         </Router>

@@ -1,6 +1,6 @@
 import { Outlet } from "react-router-dom";
-import Navbar from "./Navbar";
-import Player from "./player/Player";
+import { Navbar } from "./navbar";
+import { Player } from "./player";
 import Sidebar from "./Sidebar";
 
 const SharedLayout = () => {

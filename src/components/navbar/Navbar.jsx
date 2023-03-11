@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
-import Search from "./navbar/Search";
-import Languages from "./navbar/Languages";
-import Profile from "./navbar/Profile";
+import Search from "./Search";
+import Languages from "./Languages";
+import Profile from "./Profile";
 
 const Navbar = () => {
   return (
