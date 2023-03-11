@@ -22,7 +22,6 @@ const SearchTrending = () => {
   return (
     <article
       className="grid sm:grid-cols-2 lg:grid-cols-3 gap-y-3 pb-5 pt-2 flex-wrap shrink-0"
-    
     >
       {songs?.slice(0, 3).map((song) => {
         const { name, image, type, id } = song;
