@@ -1,9 +1,6 @@
 import { FaPlay, FaRegHeart, SlOptions } from "../../utils/icons";
 import { useDispatch, useSelector } from "react-redux";
-import {
-  handleIsPlaying,
-  playSong,
-} from "../../features/playerSlice";
+import { handleIsPlaying, playSong } from "../../features/playerSlice";
 import { useNavigate } from "react-router-dom";
 
 const ImageCard = ({ item, width, height }) => {

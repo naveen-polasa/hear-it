@@ -123,6 +123,7 @@ export const {
   setDownload,
   handleControls,
   setSongNum,
+  
 } = playerSlice.actions;
 
 export default playerSlice.reducer;

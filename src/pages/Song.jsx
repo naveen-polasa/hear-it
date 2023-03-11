@@ -1,8 +1,14 @@
-
-import SongCard from "../components/cards/SongCard";
-import SongsCard from "../components/cards/SongsCard";
+import { useEffect } from "react";
+import { useDispatch } from "react-redux";
+import { SongCard, SongsCard } from "../components/cards";
+import { homeDataFetch } from "../features/homeSlice";
 
 const Song = () => {
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(homeDataFetch());
+  }, []);
+
   return (
     <article>
       <SongCard />

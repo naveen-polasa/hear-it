@@ -34,7 +34,7 @@ const homeSlice = createSlice({
       })
       .addCase(homeDataFetch.fulfilled, (state, { payload }) => {
         const { albums, playlists, charts, trending } = payload;
-        // console.log(albums)
+        // console.log(trending)
         return { ...state, albums, playlists, charts, trending, data: payload };
       })
       .addCase(homeDataFetch.rejected, (state, { payload }) => {

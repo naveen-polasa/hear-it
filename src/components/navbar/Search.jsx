@@ -1,5 +1,6 @@
 import { useDispatch, useSelector } from "react-redux";
 import { handleIsActive, setSearchVal } from "../../features/searchSlice";
+import SearchResult from "./SearchResult";
 const Search = () => {
   const { searchVal, isActive } = useSelector((store) => store.search);
   const dispatch = useDispatch();
@@ -9,18 +10,27 @@ const Search = () => {
         <input
           type="text"
           className="px-6 mx-4 md:mx-0 lg:w-96 h-12 rounded-3xl border-2 
-          focus:absolute top-4  right-16 md:right-0  md:left-[10vw] focus:shadow-lg sm:focus:w-[82vw]  focus:duration-1000 focus:mx-auto"
+          focus:absolute top-4 xl:focus:rounded-b-3xl right-16 md:right-0  md:left-[10vw] focus:shadow-lg sm:focus:w-[82vw]  focus:duration-500 focus:mx-auto outline-none"
           placeholder={`${!isActive ? "Search..." : ""}`}
           value={searchVal}
           onChange={(e) => dispatch(setSearchVal(e.target.value))}
           onSelect={() => {
             dispatch(handleIsActive(true));
           }}
-          onBlur={() => {
-            dispatch(handleIsActive(false));
-          }}
         />
       </form>
+      <div
+        className={`px-6 x-4 md:mx-0 w-[24rem] rounded-t-lg  rounded-b-3xl border-t-0 border-2 bg-white ${
+          isActive
+            ? "absolute z-50 top-[4rem] right-16 md:right-0  md:left-[15%] xl:left-[13%] shadow-lg w-[80%] xl:w-[85%] mx-auto"
+            : "hidden"
+        }
+           `}
+        onClick={() => dispatch(handleIsActive(false))}
+        onMouseLeave={() => dispatch(handleIsActive(false))}
+      >
+        <SearchResult />
+      </div>
     </div>
   );
 };

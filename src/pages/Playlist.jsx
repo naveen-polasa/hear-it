@@ -34,7 +34,7 @@ const Playlist = () => {
           <p className="py-0.5">
             <span className="capitalize">{type}</span>
             <BsDot className="inline-block opacity-60" />
-            <span>{formatNum(playCount)}</span> Plays{" "}
+            <span>{formatNum(parseInt(playCount))}</span> Plays{" "}
             <BsDot className="inline-block opacity-60" />
             <span>{formatTime(duration)}</span>{" "}
             <BsDot className="inline-block opacity-60" />
