@@ -5,8 +5,8 @@ import {
   TopAlbums,
   TopCharts,
   TopPlaylists,
-} from "./components/browse";
-import { History, Albums, Artists, Songs } from "./components/my-library";
+} from "./pages/browse";
+import { History, Albums, Artists, Songs } from "./pages/my-library";
 import Music from "./components/navbar/Music";
 import Podcasts from "./components/navbar/Podcasts";
 

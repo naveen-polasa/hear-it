@@ -1,13 +1,12 @@
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import MusicCards from "../MusicCard";
 import { playerSongFetch } from "../../features/playerSlice";
 import { homeDataFetch } from "../../features/homeSlice";
+import PlaylistCard from "../../components/cards/PlaylistCard";
 
-const TopAlbums = () => {
-  const { trending } = useSelector((store) => store.home);
-  const { songs, albums } = trending;
-  
+const TopPlaylists = () => {
+  const { playlists } = useSelector((store) => store.home);
+
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(homeDataFetch());
@@ -16,9 +15,9 @@ const TopAlbums = () => {
 
   return (
     <section>
-      <h3 className="py-6 px-8 text-2xl font-semibold">Top Albums</h3>
-      <MusicCards data={albums} />
+      <h3 className="py-6 px-8 text-2xl font-semibold">Top Playlists</h3>
+      <PlaylistCard data={playlists} />
     </section>
   );
 };
-export default TopAlbums;
+export default TopPlaylists;

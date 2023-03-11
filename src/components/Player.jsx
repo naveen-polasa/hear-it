@@ -1,16 +1,17 @@
 import { useEffect, useRef, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { formatName, formatTime } from "../utils/utilFunctions";
 import {
   FaPause,
   FaPlay,
   FaVolumeUp,
   FaVolumeMute,
   FaDownload,
-} from "react-icons/fa";
-import { HiDownload } from "react-icons/hi";
-import { GiPreviousButton, GiNextButton } from "react-icons/gi";
-import { SlOptions } from "react-icons/sl";
-import { useDispatch, useSelector } from "react-redux";
-import { formatName, formatTime } from "../utils/utilFunctions";
+  HiDownload,
+  GiPreviousButton,
+  GiNextButton,
+  SlOptions,
+} from "../utils/icons";
 import {
   handleIsPlaying,
   setProgressBarWidth,
@@ -189,8 +190,11 @@ const Player = () => {
                   >
                     <p>{url.quality}</p>
                     <span>
-                      <a href={url.link}>
-                        <HiDownload size="24px" className="hover:scale-125 duration-200" />
+                      <a href={url.link} target="_blank">
+                        <HiDownload
+                          size="24px"
+                          className="hover:scale-125 duration-200"
+                        />
                       </a>
                     </span>
                   </div>

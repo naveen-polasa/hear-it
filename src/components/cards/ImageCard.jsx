@@ -1,7 +1,6 @@
-import { FaPlay, FaRegHeart } from "react-icons/fa";
-import { SlOptions } from "react-icons/sl";
+import { FaPlay, FaRegHeart, SlOptions } from "../../utils/icons";
 import { useDispatch } from "react-redux";
-import { handleIsPlaying, playSong } from "../features/playerSlice";
+import { handleIsPlaying, playSong } from "../../features/playerSlice";
 
 const ImageCard = ({ item, width, height }) => {
   const { id, image, name, type } = item;
@@ -11,11 +10,11 @@ const ImageCard = ({ item, width, height }) => {
       <img
         src={image[2].link}
         alt={name}
-        style={{height: `${height}rem`}}
+        style={{ height: `${height}rem` }}
         className={`w-${width} h-44 object-cover rounded-xl`}
       />
       <div
-        style={{height: `${height}rem`}}
+        style={{ height: `${height}rem` }}
         className={`opacity-0 hover:opacity-100 w-${width} absolute top-0 left-0 flex justify-center items-center bg-black rounded-xl bg-opacity-40 duration-700`}
       >
         <span

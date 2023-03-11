@@ -1,4 +1,4 @@
-import { formatName } from "../utils/utilFunctions";
+import { formatName } from "../../utils/utilFunctions";
 import ImageCard from "./ImageCard";
 
 const MusicCard = ({ data }) => {

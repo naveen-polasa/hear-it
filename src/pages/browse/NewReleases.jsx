@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import MusicCard from "../MusicCard";
+import MusicCard from "../../components/cards/MusicCard";
 import { homeDataFetch } from "../../features/homeSlice";
 import { playerSongFetch } from "../../features/playerSlice";
 
