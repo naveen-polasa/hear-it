@@ -87,7 +87,7 @@ const Player = () => {
   };
 
   return (
-    <section className="fixed bottom-0 h-20 bg-red-100 w-[100vw] max-w-[1440px] rounded-t-lg">
+    <section className="fixed bottom-0 h-20 bg-red-100 w-[100vw] max-w-[1440px] rounded-t-lg border-x-2 border-red-200">
       <audio
         src={downloadUrl?.[1]?.link}
         ref={ref}

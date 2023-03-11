@@ -12,3 +12,7 @@ export const formatName = (name) => {
   name = name.replaceAll("&amp;", "&");
   return name.replaceAll("&quot;", '"');
 };
+
+export const formatNum = (num) => {
+  return num ? num.toLocaleString() : null;
+};

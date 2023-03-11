@@ -1,6 +1,5 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
-import { Link } from "react-router-dom";
 import {
   baseURL,
   songByIdUrl,
@@ -93,24 +92,20 @@ const playerSlice = createSlice({
         state.isLoading = false;
         switch (state.type) {
           case "song": {
-            // todo in singlepage
             state.currentSongData = payload?.[0];
             state.songsList = payload;
             return;
           }
           case "album": {
-            // todo in singlepage
             const { songs } = payload;
             state.songsList = songs;
             state.currentSongData = songs?.[0];
             return;
           }
           case "playlist": {
-            // todo in singlepage
             const { songs } = payload;
             state.songsList = songs;
             state.currentSongData = songs?.[0];
-            return;
           }
         }
       })

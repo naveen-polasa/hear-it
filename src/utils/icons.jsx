@@ -10,6 +10,7 @@ import {
 import { HiDownload } from "react-icons/hi";
 import { GiPreviousButton, GiNextButton } from "react-icons/gi";
 import { SlOptions } from "react-icons/sl";
+import { BsDot } from "react-icons/bs";
 
 export {
   FaPause,
@@ -22,4 +23,5 @@ export {
   GiNextButton,
   SlOptions,
   FaRegHeart,
+  BsDot,
 };

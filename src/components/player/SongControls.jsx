@@ -11,7 +11,7 @@ const SongControls = ({ songsList, handlePlay }) => {
   const { isPlaying } = useSelector((store) => store.player);
   const dispatch = useDispatch();
   return (
-    <div className="flex gap-x-6 ">
+    <div className="flex ml-4 md:ml-0 gap-x-6 ">
       <button
         onClick={() => dispatch(handleControls("prev"))}
         className={`${songsList.length < 2 ? "opacity-75" : null}`}
