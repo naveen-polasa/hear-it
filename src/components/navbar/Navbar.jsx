@@ -5,7 +5,7 @@ import Profile from "./Profile";
 
 const Navbar = () => {
   return (
-    <div className="h-20 flex items-center justify-between px-2 border-b-2 border-x-2">
+    <div className="relative h-20 flex items-center justify-between px-2 border-b-2 border-x-2">
       <div className="flex items-center gap-x-9">
         <div className="px-3 shrink-0">
           <Link to="/">

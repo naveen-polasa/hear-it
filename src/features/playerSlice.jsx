@@ -1,11 +1,5 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
-import {
-  baseURL,
-  songByIdUrl,
-  albumByIdUrl,
-  playlistByIdUrl,
-} from "../utils/constants";
 
 const initialState = {
   isPlaying: false,
