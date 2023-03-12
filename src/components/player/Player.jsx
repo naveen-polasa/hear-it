@@ -45,13 +45,12 @@ const Player = () => {
 
   const handlePlay = () => {
     dispatch(handleIsPlaying(!isPlaying));
-    if (!isPlaying) {
-      ref.current.play();
-      return;
-    } else {
-      ref.current.pause();
-    }
   };
+  
+  useEffect(() => {
+    if (!isPlaying) ref.current.pause();
+    else ref.current.play();
+  }, [isPlaying]);
 
   useEffect(() => {
     if (currentTime < 1) return;

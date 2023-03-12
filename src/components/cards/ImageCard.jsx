@@ -13,6 +13,7 @@ const ImageCard = ({ item, width, height }) => {
 
   const handleClick = (e) => {
     if (!e.target.classList.contains("image")) return;
+    dispatch(handleIsPlaying(false));
     const path = `${type}/${id}`;
     navigate(path);
   };

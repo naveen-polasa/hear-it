@@ -27,7 +27,7 @@ const Search = () => {
         }
            `}
         onClick={() => dispatch(handleIsActive(false))}
-        onMouseLeave={() => dispatch(handleIsActive(false))}
+        // onMouseLeave={() => dispatch(handleIsActive(false))}
       >
         <SearchResult />
       </div>

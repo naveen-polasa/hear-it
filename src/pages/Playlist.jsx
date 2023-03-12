@@ -3,7 +3,6 @@ import { formatName, formatNum, formatTime } from "../utils/utilFunctions";
 import { BsDot, FaHome } from "../utils/icons";
 import { SongsCard,CardButtons } from "../components/cards";
 import { homeDataFetch } from "../features/homeSlice";
-import { handleIsPlaying } from "../features/playerSlice";
 import { useEffect } from "react";
 
 const Playlist = () => {
@@ -13,7 +12,6 @@ const Playlist = () => {
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(homeDataFetch());
-    dispatch(handleIsPlaying(false));
   }, []);
 
   const {
