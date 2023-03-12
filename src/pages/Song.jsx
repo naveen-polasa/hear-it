@@ -1,14 +1,18 @@
-import { useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import { SongCard, SongsCard } from "../components/cards";
-import { homeDataFetch } from "../features/homeSlice";
+import Loading from "../utils/Loading";
+import NotFound from "../utils/NotFound";
 
 const Song = () => {
-  const { isPlaying } = useSelector((store) => store.player);
-  const dispatch = useDispatch();
-  useEffect(() => {
-    dispatch(homeDataFetch());
-  }, []);
+  const { isLoading, isError } = useSelector((store) => store.player);
+
+  if (isLoading) {
+    return <Loading />;
+  }
+
+  if (isError) {
+    return <NotFound />;
+  }
 
   return (
     <article className="px-1">

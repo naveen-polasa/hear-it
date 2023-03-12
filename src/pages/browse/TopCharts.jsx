@@ -1,17 +1,18 @@
-import { useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { playerSongFetch } from "../../features/playerSlice";
-import { homeDataFetch } from "../../features/homeSlice";
+import { useSelector } from "react-redux";
 import MusicChartCard from "../../components/cards/MusicChartCard";
+import Loading from "../../utils/Loading";
+import NotFound from "../../utils/NotFound";
 
 const TopCharts = () => {
-  const { charts } = useSelector((store) => store.home);
+  const { charts, isLoading, isError } = useSelector((store) => store.home);
 
-  const dispatch = useDispatch();
-  useEffect(() => {
-    dispatch(homeDataFetch());
-    dispatch(playerSongFetch());
-  }, []);
+  if (isLoading) {
+    return <Loading />;
+  }
+
+  if (isError) {
+    return <NotFound />;
+  }
 
   return (
     <section>

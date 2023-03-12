@@ -29,8 +29,6 @@ export const playerSongFetch = createAsyncThunk(
       const { data } = resp;
       return data;
     } catch (error) {
-      console.log(error.response);
-      console.log(thunkAPI);
       return thunkAPI.rejectWithValue(error.response.data.message);
     }
   }
@@ -85,10 +83,12 @@ const playerSlice = createSlice({
   extraReducers: (builder) => {
     builder
       .addCase(playerSongFetch.pending, (state) => {
+        state.isError = false;
         state.isLoading = true;
       })
       .addCase(playerSongFetch.fulfilled, (state, { payload }) => {
         state.isLoading = false;
+        state.isError = false;
         switch (state.type) {
           case "song": {
             state.currentSongData = payload?.[0];
@@ -109,8 +109,10 @@ const playerSlice = createSlice({
         }
       })
       .addCase(playerSongFetch.rejected, (state, { payload }) => {
+        console.log('payload');
         state.currentSongData = initialState.currentSongData;
         state.songsList = initialState.songsList;
+        state.isLoading = false;
         state.isError = true;
       });
   },

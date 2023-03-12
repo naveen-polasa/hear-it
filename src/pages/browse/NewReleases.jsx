@@ -1,26 +1,17 @@
-import { useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import MusicCard from "../../components/cards/MusicCard";
-import { homeDataFetch } from "../../features/homeSlice";
-import { playerSongFetch } from "../../features/playerSlice";
 import Loading from "../../utils/Loading";
+import NotFound from "../../utils/NotFound";
 const NewReleases = () => {
-  const { albums, isLoading } = useSelector((store) => store.home);
-  // console.log(albums, playlists, charts, trending);
-  // playlists => top playlists
-  // charts => top charts
-  // trending/albums => top albums
-  // console.log(trending);
-  const dispatch = useDispatch();
-  useEffect(() => {
-    dispatch(homeDataFetch());
-    dispatch(playerSongFetch());
-  }, []);
+  const { albums, isLoading, isError } = useSelector((store) => store.home);
 
   if (isLoading) {
     return <Loading />;
   }
 
+  if (isError) {
+    return <NotFound />;
+  }
   return (
     <section>
       <h3 className="py-6 px-8 text-2xl font-semibold">New Songs</h3>

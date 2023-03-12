@@ -13,15 +13,18 @@ const initialState = {
   play: null,
 };
 
-export const homeDataFetch = createAsyncThunk("homeData", async () => {
-  try {
-    const { data: resp } = await axios(homeDataFetchUrl);
-    const { data } = resp;
-    return data;
-  } catch (error) {
-    console.log(error.response);
+export const homeDataFetch = createAsyncThunk(
+  "homeData",
+  async (_, thunkAPI) => {
+    try {
+      const { data: resp } = await axios(homeDataFetchUrl);
+      const { data } = resp;
+      return data;
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error.response.data.message);
+    }
   }
-});
+);
 
 const homeSlice = createSlice({
   name: "homeSlice",
@@ -31,10 +34,10 @@ const homeSlice = createSlice({
     builder
       .addCase(homeDataFetch.pending, (state) => {
         state.isLoading = true;
+        state.isError = false;
       })
       .addCase(homeDataFetch.fulfilled, (state, { payload }) => {
         const { albums, playlists, charts, trending } = payload;
-        // console.log(trending)
         return {
           ...state,
           albums,
@@ -43,11 +46,14 @@ const homeSlice = createSlice({
           trending,
           data: payload,
           isLoading: false,
+          isError: false,
         };
       })
       .addCase(homeDataFetch.rejected, (state, { payload }) => {
-        state.isError = false;
+        console.log(payload)
         console.log(payload);
+        state.isLoading = false;
+        state.isError = true;
       });
   },
 });

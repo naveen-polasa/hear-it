@@ -1,18 +1,19 @@
-import { useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import MusicCard from "../../components/cards/MusicCard";
-import { playerSongFetch } from "../../features/playerSlice";
-import { homeDataFetch } from "../../features/homeSlice";
+import Loading from "../../utils/Loading";
+import NotFound from "../../utils/NotFound";
 
 const TopAlbums = () => {
-  const { trending } = useSelector((store) => store.home);
+  const { trending, isLoading, isError } = useSelector((store) => store.home);
   const { songs, albums } = trending;
 
-  const dispatch = useDispatch();
-  useEffect(() => {
-    dispatch(homeDataFetch());
-    dispatch(playerSongFetch());
-  }, []);
+  if (isLoading) {
+    return <Loading />;
+  }
+
+  if (isError) {
+    return <NotFound />;
+  }
 
   return (
     <section>

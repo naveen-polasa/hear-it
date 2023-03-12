@@ -10,6 +10,7 @@ import {
   playerSongFetch,
 } from "../../features/playerSlice";
 import { SongDetails, SongControls, Download, Volume } from "./index";
+import { homeDataFetch } from "../../features/homeSlice";
 
 const Player = () => {
   const [mousedown, setMouseDown] = useState(false);
@@ -28,11 +29,15 @@ const Player = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
+    dispatch(homeDataFetch());
+  }, []);
+
+  useEffect(() => {
     dispatch(playerSongFetch({ songId, type }));
   }, [songId, type]);
 
   const { downloadUrl, name, primaryArtists, image } = currentSongData;
-// console.log(downloadUrl, name, primaryArtists, image);
+  // console.log(downloadUrl, name, primaryArtists, image);
   useEffect(() => {
     if (!isPlaying) return;
     ref.current.play();
@@ -46,7 +51,7 @@ const Player = () => {
   const handlePlay = () => {
     dispatch(handleIsPlaying(!isPlaying));
   };
-  
+
   useEffect(() => {
     if (!isPlaying) ref.current.pause();
     else ref.current.play();

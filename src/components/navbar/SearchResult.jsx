@@ -8,6 +8,7 @@ import SearchTrending from "./SearchTrending";
 
 const SearchResult = () => {
   const { searchVal, result } = useSelector((store) => store.search);
+  const { isError } = useSelector((store) => store.home);
   const dispatch = useDispatch();
 
   const navigate = useNavigate();
@@ -24,6 +25,7 @@ const SearchResult = () => {
   }, [searchVal]);
 
   if (!searchVal) {
+    if (isError) return;
     return (
       <>
         <p className="text-xl py-2 font-semibold font-mono">Trending</p>

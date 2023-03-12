@@ -1,18 +1,22 @@
-import { useDispatch, useSelector } from "react-redux";
+import {  useSelector } from "react-redux";
 import { formatName, formatNum, formatTime } from "../utils/utilFunctions";
 import { BsDot, FaHome } from "../utils/icons";
 import { SongsCard,CardButtons } from "../components/cards";
-import { homeDataFetch } from "../features/homeSlice";
-import { useEffect } from "react";
+import Loading from "../utils/Loading";
+import NotFound from "../utils/NotFound";
 
 const Playlist = () => {
-  const { currentSongData, songsList, type } = useSelector(
+  const { currentSongData, songsList, type, isLoading,isError } = useSelector(
     (store) => store.player
   );
-  const dispatch = useDispatch();
-  useEffect(() => {
-    dispatch(homeDataFetch());
-  }, []);
+
+  if (isLoading) {
+    return <Loading />;
+  }
+
+  if (isError) {
+    return <NotFound />;
+  }
 
   const {
     name,
@@ -23,6 +27,7 @@ const Playlist = () => {
     image,
     playCount,
   } = currentSongData;
+
   return (
     <article >
       <div className="flex items-center gap-9 m-5 md:m-8  flex-wrap">
