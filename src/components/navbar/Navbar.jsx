@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import Search from "./Search";
+import logo from "../../assets/logo.png";
 import Languages from "./Languages";
 import Profile from "./Profile";
 
@@ -9,16 +10,12 @@ const Navbar = () => {
       <div className="flex items-center gap-x-3 md:gap-x-9">
         <div className="px-3 shrink-0">
           <Link to="/">
-            <img
-              src="./src/assets/logo.png"
-              alt="logo"
-              className="w-24 md:w-28"
-            />
+            <img src={logo} alt="logo" className="w-[70px] sm:w-24 md:w-28" />
           </Link>
         </div>
         <Link
           to="/"
-          className="font-mono text-xl md:hidden hover:border-b border-red-400 duration-150"
+          className="font-mono sm:text-xl md:hidden hover:border-b border-red-400 duration-150"
         >
           Home
         </Link>

@@ -30,7 +30,11 @@ const Volume = ({ handleVolume, handleVolumeChange }) => {
             onChange={handleVolumeChange}
           />
         </div>
-        {volume ? <FaVolumeUp size="28px" /> : <FaVolumeMute size="28px" />}
+        {volume ? (
+          <FaVolumeUp className="w-5 h-5 md:w-7 md:h-7" />
+        ) : (
+          <FaVolumeMute className="w-5 h-5 md:w-7 md:h-7" />
+        )}
       </button>
     </>
   );

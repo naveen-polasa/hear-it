@@ -3,10 +3,10 @@ import ImageCard from "./ImageCard";
 
 const MusicCard = ({ data }) => {
   return (
-    <article className="flex justify-center flex-wrap shrink-0 gap-8">
+    <article className="flex justify-center flex-wrap shrink-0 gap-x-1 gap-y-6 sm:gap-8">
       {data?.map((item) => {
         const { id, name, primaryArtists, artists, type, songCount } = item;
-        
+
         return (
           <div key={id} className="w-44 relative">
             <div>

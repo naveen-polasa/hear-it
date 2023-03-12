@@ -9,7 +9,7 @@ const Search = () => {
       <form onSubmit={(e) => e.preventDefault()}>
         <input
           type="text"
-          className={`px-6 mx-4 md:mx-0 w-56 lg:w-[33rem] h-12 rounded-3xl border-2 
+          className={`px-6 mr-2 sm:mx-4 md:mx-0 w-40 sm:w-56 lg:w-[33rem] h-12 rounded-3xl border-2 
           ${
             isActive &&
             "focus:absolute top-4 xl:focus:rounded-b-3xl right-[9vw] md:right-0 left-[10vw] focus:shadow-lg focus:w-[82vw]  focus:duration-500 focus:mx-auto outline-none"

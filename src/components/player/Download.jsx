@@ -13,7 +13,7 @@ const Download = ({ downloadUrl }) => {
         onMouseOver={() => dispatch(setDownload(true))}
         onMouseLeave={() => dispatch(setDownload(false))}
       >
-        <FaDownload size="26px" />
+        <FaDownload className="w-5 h-5 md:w-7 md:h-7" />
         <div
           className={`absolute ${
             download ? "block" : "hidden"

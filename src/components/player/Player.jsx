@@ -131,7 +131,7 @@ const Player = () => {
             / <span>{formatTime(Math.floor(ref.current?.duration || 0))}</span>
           </span>
           <button>
-            <SlOptions size="28px" />
+            <SlOptions className="w-5 h-5 md:w-7 md:h-7" />
           </button>
           <Download downloadUrl={downloadUrl} />
           <Volume
