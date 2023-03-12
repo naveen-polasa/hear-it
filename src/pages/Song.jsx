@@ -2,11 +2,13 @@ import { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { SongCard, SongsCard } from "../components/cards";
 import { homeDataFetch } from "../features/homeSlice";
+import { handleIsPlaying } from "../features/playerSlice";
 
 const Song = () => {
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(homeDataFetch());
+    dispatch(handleIsPlaying(false));
   }, []);
 
   return (

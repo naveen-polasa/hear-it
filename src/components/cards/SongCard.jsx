@@ -16,6 +16,7 @@ const SongCard = () => {
     image,
     playCount,
   } = currentSongData;
+  
   return (
     <div className="flex items-center gap-9 m-2 md:m-5  flex-wrap">
       <div>

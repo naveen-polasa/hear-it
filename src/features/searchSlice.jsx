@@ -5,12 +5,12 @@ import { searchAllUrl } from "../utils/constants";
 const initialState = {
   searchVal: "",
   isActive: false,
-  result: {},
+  result: { topQuery: {}, albums: {}, songs: {} },
 };
 
 export const searchValFetch = createAsyncThunk(
   "searchData",
-  async (searchvalue) => {
+  async (searchvalue, thunkAPI) => {
     try {
       const url = `${searchAllUrl}${searchvalue}`;
       const { data: resp } = await axios(url);
@@ -18,6 +18,7 @@ export const searchValFetch = createAsyncThunk(
       return data;
     } catch (error) {
       console.log(error.response);
+      return thunkAPI.rejectWithValue(error.response.data.message);
     }
   }
 );
@@ -35,12 +36,15 @@ const searchSlice = createSlice({
   },
   extraReducers: (builder) => {
     builder
-      .addCase(searchValFetch.pending, (state) => {})
+      .addCase(searchValFetch.pending, (state) => {
+        state.result = initialState.result;
+      })
       .addCase(searchValFetch.fulfilled, (state, { payload }) => {
         state.result = payload;
       })
       .addCase(searchValFetch.rejected, (state, { payload }) => {
         console.log(payload);
+        state.result = initialState.result;
       });
   },
 });

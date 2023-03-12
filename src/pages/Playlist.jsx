@@ -1,19 +1,25 @@
-import { useSelector } from "react-redux";
-import CardButtons from "../components/cards/CardButtons";
+import { useDispatch, useSelector } from "react-redux";
 import { formatName, formatNum, formatTime } from "../utils/utilFunctions";
 import { BsDot, FaHome } from "../utils/icons";
-import SongsCard from "../components/cards/SongsCard";
+import { SongsCard,CardButtons } from "../components/cards";
+import { homeDataFetch } from "../features/homeSlice";
+import { handleIsPlaying } from "../features/playerSlice";
+import { useEffect } from "react";
 
 const Playlist = () => {
   const { currentSongData, songsList, type } = useSelector(
     (store) => store.player
   );
-  
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(homeDataFetch());
+    dispatch(handleIsPlaying(false));
+  }, []);
+
   const {
     name,
     copyright,
     duration,
-    hasLyrics,
     language,
     primaryArtists,
     image,

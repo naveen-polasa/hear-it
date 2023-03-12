@@ -8,7 +8,7 @@ const initialState = {
   progressBarWidth: 0,
   volumeBar: false,
   download: false,
-  currentSongData: [],
+  currentSongData: {},
   isLoading: false,
   isError: false,
   id: "Hpd68_cZ",
@@ -30,6 +30,8 @@ export const playerSongFetch = createAsyncThunk(
       return data;
     } catch (error) {
       console.log(error.response);
+      console.log(thunkAPI);
+      return thunkAPI.rejectWithValue(error.response.data.message);
     }
   }
 );
@@ -102,12 +104,15 @@ const playerSlice = createSlice({
           }
           case "playlist": {
             const { songs } = payload;
+            console.log(payload);
             state.songsList = songs;
             state.currentSongData = songs?.[0];
           }
         }
       })
-      .addCase(playerSongFetch.rejected, (state) => {
+      .addCase(playerSongFetch.rejected, (state, { payload }) => {
+        // console.log(payload);
+        // console.log(initialState);
         state.isError = true;
       });
   },
@@ -123,7 +128,6 @@ export const {
   setDownload,
   handleControls,
   setSongNum,
-  
 } = playerSlice.actions;
 
 export default playerSlice.reducer;
