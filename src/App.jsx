@@ -13,7 +13,6 @@ import {
   Album,
   Playlist,
 } from "./pages";
-import { Music, Podcasts } from "./components/navbar";
 
 function App() {
   return (
@@ -22,10 +21,6 @@ function App() {
         <Router>
           <Routes>
             <Route path="/" element={<SharedLayout />}>
-              {/* navbar start */}
-              <Route path="music" element={<Music />} />
-              <Route path="podcasts" element={<Podcasts />} />
-              {/* navbar end */}
               {/* browse start */}
               <Route index element={<NewReleases />} />
               <Route path="top_charts" element={<TopCharts />} />
@@ -34,7 +29,6 @@ function App() {
               <Route path="top_playlists/playlist/:id" element={<Playlist />} />
               <Route path="top_albums" element={<TopAlbums />} />
               <Route path="top_albums/album/:id" element={<Album />} />
-
               {/* browse end */}
               {/* library start */}
               <Route path="history" element={<History />} />

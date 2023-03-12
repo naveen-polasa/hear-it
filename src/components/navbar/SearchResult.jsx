@@ -36,7 +36,7 @@ const SearchResult = () => {
   const { topQuery, songs, albums } = result;
 
   return (
-    <article className="grid md:grid-cols-2 xl:grid-cols-3 gap-y-3 pb-5 pt-2 flex-wrap shrink-0 overflow-y-scroll h-[calc(100vh-10rem)] xl:h-fit">
+    <article className="grid md:grid-cols-2 xl:grid-cols-3 gap-y-3 pb-5 pt-2 flex-wrap shrink-0 overflow-y-scroll scrollbar h-[calc(100vh-10rem)] xl:h-fit">
       <div>
         <p className="text-lg py-2 font-semibold font-mono">Top Result</p>
         <SearchResCard topQuery={topQuery} handlePlay={handlePlay} />

@@ -1,8 +1,6 @@
 import { Link } from "react-router-dom";
 import Search from "./Search";
 import logo from "../../assets/logo.png";
-import Languages from "./Languages";
-import Profile from "./Profile";
 
 const Navbar = () => {
   return (
@@ -19,9 +17,6 @@ const Navbar = () => {
         >
           Home
         </Link>
-        {/* <Link to="podcasts" className="font-mono text-xl hidden lg:flex">
-          Podcasts
-        </Link> */}
       </div>
       <Search />
       <div className="gap-6 justify-center mx-16 hidden md:flex font-mono">
@@ -31,8 +26,6 @@ const Navbar = () => {
         >
           Home
         </Link>
-        {/* <Languages /> */}
-        {/* <Profile /> */}
       </div>
     </div>
   );

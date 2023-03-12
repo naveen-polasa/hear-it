@@ -1,4 +1,3 @@
-import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { handleIsPlaying, playSong } from "../../features/playerSlice";
@@ -20,7 +19,7 @@ const SearchTrending = () => {
   };
 
   return (
-    <article className="grid md:grid-cols-2 lg:grid-cols-3 gap-x-2 gap-y-3 pb-5 pt-2 flex-wrap shrink-0 overflow-x-hidden overflow-y-scroll h-[calc(100vh-13rem)] md:h-fit">
+    <article className="grid md:grid-cols-2 lg:grid-cols-3 gap-x-2 gap-y-3 pb-5 pt-2 flex-wrap shrink-0 overflow-x-hidden overflow-y-scroll scrollbar h-[calc(100vh-13rem)] md:h-fit">
       {songs?.slice(0, 3).map((song) => {
         const { name, image, type, id } = song;
         return (

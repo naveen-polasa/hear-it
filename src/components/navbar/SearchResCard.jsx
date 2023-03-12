@@ -28,10 +28,10 @@ const SearchResCard = ({ songs, albums, topQuery, handlePlay }) => {
               onClick={() => handlePlay(id, type)}
             />
             <div>
-              <p className="truncate w-52 sm:w-64 capitalize font-semibold">
+              <p className="truncate w-40 sm:w-64 capitalize font-semibold">
                 {formatName(title)}
               </p>
-              <p className="capitalize truncate w-52 sm:w-64 ">{description} </p>
+              <p className="capitalize truncate w-40 sm:w-64">{description} </p>
             </div>
           </div>
         );

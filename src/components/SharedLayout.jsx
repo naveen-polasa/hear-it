@@ -11,8 +11,7 @@ const SharedLayout = () => {
         <Sidebar />
       </div>
       <div
-        className="absolute top-0 md:ml-60 mt-20 p-2 h-[calc(100vh-5rem)] py-3 w-screen md:w-[calc(100%-15rem)]
-     max-w-[75rem] pb-24 overflow-y-scroll border-r-2"
+        className="absolute top-0 md:ml-60 mt-20 p-2 h-[calc(100vh-5rem)] py-3 w-screen md:w-[calc(100%-15rem)] max-w-[75rem] pb-24 overflow-y-scroll scrollbar border-r-2"
       >
         <Outlet />
       </div>
