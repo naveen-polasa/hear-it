@@ -10,23 +10,26 @@ const SearchResCard = ({ songs, albums, topQuery, handlePlay }) => {
       {data?.results?.map((res) => {
         const { title, description, image, type, id } = res;
         return (
-          <div key={id} className="flex gap-x-5 my-3">
-            <button onClick={() => handlePlay(id, type)} className="shrink-0">
-              <img
-                src={image?.[1].link}
-                alt={title}
-                className="w-14 rounded-lg"
-                onClick={() => handlePlay(id, type)}
-              />
-            </button>
+          <div
+            key={id}
+            className={`flex gap-x-5 my-3 ${
+              type !== "artist" && "hover:cursor-pointer"
+            } `}
+            onClick={() => {
+              if (type !== "artist") {
+                handlePlay(id, type);
+              }
+            }}
+          >
+            <img
+              src={image?.[1].link}
+              alt={title}
+              className="w-14 rounded-lg"
+              onClick={() => handlePlay(id, type)}
+            />
             <div>
-              <p className="truncate w-64  hover:font-semibold">
-                <button
-                  className="capitalize"
-                  onClick={() => handlePlay(id, type)}
-                >
-                  {formatName(title)}
-                </button>
+              <p className="truncate w-64 capitalize font-semibold">
+                {formatName(title)}
               </p>
               <p className="capitalize truncate w-64 ">{description} </p>
             </div>

@@ -104,7 +104,6 @@ const playerSlice = createSlice({
           }
           case "playlist": {
             const { songs } = payload;
-            console.log(payload);
             state.songsList = songs;
             state.currentSongData = songs?.[0];
           }
@@ -113,6 +112,8 @@ const playerSlice = createSlice({
       .addCase(playerSongFetch.rejected, (state, { payload }) => {
         // console.log(payload);
         // console.log(initialState);
+        state.currentSongData = initialState.currentSongData;
+        state.songsList = initialState.songsList;
         state.isError = true;
       });
   },

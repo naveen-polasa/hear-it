@@ -32,7 +32,7 @@ const Player = () => {
   }, [songId, type]);
 
   const { downloadUrl, name, primaryArtists, image } = currentSongData;
-
+// console.log(downloadUrl, name, primaryArtists, image);
   useEffect(() => {
     if (!isPlaying) return;
     ref.current.play();
