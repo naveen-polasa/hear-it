@@ -66,7 +66,6 @@ const playerSlice = createSlice({
     handleControls: (state, { payload }) => {
       if (payload === "prev") {
         state.songNum--;
-        console.log(state.songNum);
         if (state.songNum < 0) {
           state.songNum = state.songsList.length - 1;
         }
@@ -110,8 +109,6 @@ const playerSlice = createSlice({
         }
       })
       .addCase(playerSongFetch.rejected, (state, { payload }) => {
-        // console.log(payload);
-        // console.log(initialState);
         state.currentSongData = initialState.currentSongData;
         state.songsList = initialState.songsList;
         state.isError = true;

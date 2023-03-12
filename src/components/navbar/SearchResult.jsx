@@ -3,7 +3,6 @@ import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { handleIsPlaying, playSong } from "../../features/playerSlice";
 import { searchValFetch } from "../../features/searchSlice";
-import { formatName } from "../../utils/utilFunctions";
 import SearchResCard from "./SearchResCard";
 import SearchTrending from "./SearchTrending";
 
@@ -12,9 +11,10 @@ const SearchResult = () => {
   const dispatch = useDispatch();
 
   const navigate = useNavigate();
+
   const handlePlay = (id, type) => {
     dispatch(playSong({ id, type }));
-    dispatch(handleIsPlaying(true));
+    dispatch(handleIsPlaying(false));
     const path = `${type}/${id}`;
     navigate(path);
   };
@@ -33,9 +33,8 @@ const SearchResult = () => {
   }
   const { topQuery, songs, albums } = result;
 
-  console.log(topQuery);
   return (
-    <article className="grid md:grid-cols-2 xl:grid-cols-3 gap-y-3 pb-5 pt-2 flex-wrap shrink-0 overflow-y-scroll h-[calc(100vh-10rem)]">
+    <article className="grid md:grid-cols-2 xl:grid-cols-3 gap-y-3 pb-5 pt-2 flex-wrap shrink-0 overflow-y-scroll h-[calc(100vh-10rem)] xl:h-fit">
       <div>
         <p className="text-lg py-2 font-semibold font-mono">Top Result</p>
         <SearchResCard topQuery={topQuery} handlePlay={handlePlay} />

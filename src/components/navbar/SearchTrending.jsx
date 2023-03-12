@@ -14,13 +14,13 @@ const SearchTrending = () => {
 
   const handlePlay = (id, type) => {
     dispatch(playSong({ id, type }));
-    dispatch(handleIsPlaying(true));
+    dispatch(handleIsPlaying(false));
     const path = `${type}/${id}`;
     navigate(path);
   };
 
   return (
-    <article className="grid sm:grid-cols-2 lg:grid-cols-3 gap-x-2 gap-y-3 pb-5 pt-2 flex-wrap shrink-0 overflow-x-hidden overflow-y-scroll h-[calc(100vh-13rem)] ">
+    <article className="grid md:grid-cols-2 lg:grid-cols-3 gap-x-2 gap-y-3 pb-5 pt-2 flex-wrap shrink-0 overflow-x-hidden overflow-y-scroll h-[calc(100vh-13rem)] md:h-fit">
       {songs?.slice(0, 3).map((song) => {
         const { name, image, type, id } = song;
         return (
@@ -40,7 +40,9 @@ const SearchTrending = () => {
               onClick={() => handlePlay(id, type)}
             />
             <div>
-              <p className="truncate w-40 md:w-64 font-semibold">{formatName(name)}</p>
+              <p className="truncate w-40 md:w-64 font-semibold">
+                {formatName(name)}
+              </p>
               <p className="capitalize">{type}</p>
             </div>
           </div>

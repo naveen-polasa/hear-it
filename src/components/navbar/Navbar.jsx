@@ -10,7 +10,7 @@ const Navbar = () => {
         <div className="px-3 shrink-0">
           <Link to="/">
             <img
-              src="/src/assets/logo.png"
+              src="./src/assets/logo.png"
               alt="logo"
               className="w-24 md:w-28"
             />
