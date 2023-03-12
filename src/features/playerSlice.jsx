@@ -109,7 +109,7 @@ const playerSlice = createSlice({
         }
       })
       .addCase(playerSongFetch.rejected, (state, { payload }) => {
-        console.log('payload');
+        console.log(payload);
         state.currentSongData = initialState.currentSongData;
         state.songsList = initialState.songsList;
         state.isLoading = false;

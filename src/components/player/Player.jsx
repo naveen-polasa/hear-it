@@ -37,7 +37,6 @@ const Player = () => {
   }, [songId, type]);
 
   const { downloadUrl, name, primaryArtists, image } = currentSongData;
-  // console.log(downloadUrl, name, primaryArtists, image);
   useEffect(() => {
     if (!isPlaying) return;
     ref.current.play();
@@ -128,7 +127,7 @@ const Player = () => {
           image={image}
         />
         <SongControls songsList={songsList} handlePlay={handlePlay} />
-        <div className="flex items-center gap-x-6 px-4">
+        <div className="flex items-center gap-x-4 sm:gap-x-6 px-0 sm:px-4">
           <span>
             <span>
               {formatTime(Math.floor(ref.current?.currentTime || 0))}{" "}

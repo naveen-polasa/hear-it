@@ -37,7 +37,7 @@ const SongsCard = () => {
               />
               <span className="truncate">{formatName(name)}</span>
             </p>
-            <p className="truncate pl-3">{primaryArtists}</p>
+            <p className="truncate pl-3">{formatName(primaryArtists)}</p>
             <p className="mx-1">{formatTime(duration)}</p>
           </div>
         );

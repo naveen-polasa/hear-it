@@ -5,9 +5,7 @@ import { useNavigate } from "react-router-dom";
 
 const ImageCard = ({ item, width, height }) => {
   const { id, image, name, type } = item;
-  const { singlePage } = useSelector((store) => store.player);
   const dispatch = useDispatch();
-  // console.log(singlePage);
 
   const navigate = useNavigate();
 
