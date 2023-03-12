@@ -24,7 +24,7 @@ const Playlist = () => {
     playCount,
   } = currentSongData;
   return (
-    <article>
+    <article >
       <div className="flex items-center gap-9 m-5 md:m-8  flex-wrap">
         <div>
           <img src={image?.[2].link} alt={name} className="w-64 rounded-md" />

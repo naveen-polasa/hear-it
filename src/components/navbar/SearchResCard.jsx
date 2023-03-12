@@ -12,7 +12,7 @@ const SearchResCard = ({ songs, albums, topQuery, handlePlay }) => {
         return (
           <div
             key={id}
-            className={`flex gap-x-5 my-3 ${
+            className={`flex gap-x-5 my-3  ${
               type !== "artist" && "hover:cursor-pointer"
             } `}
             onClick={() => {
@@ -24,14 +24,14 @@ const SearchResCard = ({ songs, albums, topQuery, handlePlay }) => {
             <img
               src={image?.[1].link}
               alt={title}
-              className="w-14 rounded-lg"
+              className="w-14 rounded-lg shrink-0"
               onClick={() => handlePlay(id, type)}
             />
             <div>
-              <p className="truncate w-64 capitalize font-semibold">
+              <p className="truncate w-52 sm:w-64 capitalize font-semibold">
                 {formatName(title)}
               </p>
-              <p className="capitalize truncate w-64 ">{description} </p>
+              <p className="capitalize truncate w-52 sm:w-64 ">{description} </p>
             </div>
           </div>
         );

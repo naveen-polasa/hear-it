@@ -16,7 +16,7 @@ const SongsCard = () => {
     dispatch(setSongNum(index));
   };
   return (
-    <div>
+    <div className="px-0.5">
       {songsList?.map((song, index) => {
         const { id, image, name, primaryArtists, duration, album } = song;
 

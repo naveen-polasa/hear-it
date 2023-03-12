@@ -23,7 +23,8 @@ const SongCard = () => {
         <img src={image?.[2].link} alt={name} className="w-64 rounded-md" />
       </div>
       <div>
-        <h3 className="text-4xl py-2 capitalize">{formatName(name)}</h3>
+        <h3 className="text-2xl font-semibold
+         md:font-normal md:text-4xl py-2 capitalize">{formatName(name)}</h3>
         <p className="py-0.5">
           <span className="capitalize">{formatName(name)}</span> by{" "}
           <span>{formatName(primaryArtists)}</span>

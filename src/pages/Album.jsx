@@ -10,7 +10,7 @@ const Album = () => {
   }, []);
 
   return (
-    <article>
+    <article className="px-3">
       <SongCard />
       <SongsCard />
     </article>

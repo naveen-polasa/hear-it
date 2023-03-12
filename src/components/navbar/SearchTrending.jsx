@@ -20,13 +20,13 @@ const SearchTrending = () => {
   };
 
   return (
-    <article className="grid sm:grid-cols-2 lg:grid-cols-3 gap-y-3 pb-5 pt-2 flex-wrap shrink-0 overflow-x-hidden overflow-y-scroll h-[calc(100vh-13rem)]">
+    <article className="grid sm:grid-cols-2 lg:grid-cols-3 gap-x-2 gap-y-3 pb-5 pt-2 flex-wrap shrink-0 overflow-x-hidden overflow-y-scroll h-[calc(100vh-13rem)] ">
       {songs?.slice(0, 3).map((song) => {
         const { name, image, type, id } = song;
         return (
           <div
             key={id}
-            className="flex gap-x-5 hover:cursor-pointer"
+            className="flex gap-x-5 items-center hover:cursor-pointer"
             onClick={() => {
               if (type !== "artist") {
                 handlePlay(id, type);
@@ -36,11 +36,11 @@ const SearchTrending = () => {
             <img
               src={image?.[1].link}
               alt={name}
-              className="w-14 rounded-lg shrink-0"
+              className="w-14 rounded-lg "
               onClick={() => handlePlay(id, type)}
             />
             <div>
-              <p className="truncate w-64 font-semibold">{formatName(name)}</p>
+              <p className="truncate w-40 md:w-64 font-semibold">{formatName(name)}</p>
               <p className="capitalize">{type}</p>
             </div>
           </div>
@@ -51,7 +51,7 @@ const SearchTrending = () => {
         return (
           <div
             key={id}
-            className={`flex gap-x-5 hover:cursor-pointer ${
+            className={`flex gap-x-5  items-center ${
               type !== "artist" && "hover:cursor-pointer"
             }`}
             onClick={() => {
@@ -66,7 +66,9 @@ const SearchTrending = () => {
               className="w-14 rounded-lg shrink-0"
             />
             <div>
-              <p className="truncate w-64 font-semibold">{formatName(name)}</p>
+              <p className="truncate w-40 md:w-64 font-semibold">
+                {formatName(name)}
+              </p>
               <p className="capitalize">{type}</p>
             </div>
           </div>

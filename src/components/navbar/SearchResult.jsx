@@ -26,7 +26,7 @@ const SearchResult = () => {
   if (!searchVal) {
     return (
       <>
-        <p className="text-xl py-2 font-semibold font-mono ">Trending</p>
+        <p className="text-xl py-2 font-semibold font-mono">Trending</p>
         <SearchTrending />
       </>
     );
@@ -35,7 +35,7 @@ const SearchResult = () => {
 
   console.log(topQuery);
   return (
-    <article className="grid md:grid-cols-2 xl:grid-cols-3 gap-y-3 pb-5 pt-2 flex-wrap shrink-0">
+    <article className="grid md:grid-cols-2 xl:grid-cols-3 gap-y-3 pb-5 pt-2 flex-wrap shrink-0 overflow-y-scroll h-[calc(100vh-10rem)]">
       <div>
         <p className="text-lg py-2 font-semibold font-mono">Top Result</p>
         <SearchResCard topQuery={topQuery} handlePlay={handlePlay} />

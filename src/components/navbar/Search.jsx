@@ -23,7 +23,7 @@ const Search = () => {
         />
       </form>
       <div
-        className={`px-6 mx-4 md:mx-0 w-[24rem] rounded-t-lg  rounded-b-3xl border-t-0 border-2 bg-white ${
+        className={`pl-6 mxl-4 md:mx-0 w-[24rem] rounded-t-lg  rounded-b-3xl border-t-0 border-2 bg-white ${
           isActive
             ? "absolute z-10 top-[4rem] right-16 md:right-0 left-[13%] md:left-[15%] xl:left-[13%] shadow-lg w-[80%] xl:w-[85%] mx-auto "
             : "hidden"

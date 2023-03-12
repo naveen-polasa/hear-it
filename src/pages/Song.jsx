@@ -11,7 +11,7 @@ const Song = () => {
   }, []);
 
   return (
-    <article>
+    <article className="px-1">
       <SongCard />
       <SongsCard />
     </article>
