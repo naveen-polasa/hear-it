@@ -13,6 +13,7 @@ import {
   Album,
   Playlist,
 } from "./pages";
+import Error from "./pages/Error";
 
 function App() {
   return (
@@ -42,6 +43,7 @@ function App() {
               <Route path="playlist/:id" element={<Playlist />} />
               {/* single pages end */}
             </Route>
+            <Route path="*" element={<Error/>} />
           </Routes>
         </Router>
       </div>
