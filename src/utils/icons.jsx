@@ -4,7 +4,7 @@ import {
   FaVolumeMute,
   FaDownload,
   FaPlay,
-  FaRegHeart,
+  FaRegHeart,FaHeart,
   FaHome,
 } from "react-icons/fa";
 
@@ -23,7 +23,7 @@ export {
   GiPreviousButton,
   GiNextButton,
   SlOptions,
-  FaRegHeart,
+  FaRegHeart,FaHeart,
   BsDot,
   FaHome,
 };

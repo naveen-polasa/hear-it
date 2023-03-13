@@ -34,8 +34,11 @@ function App() {
               {/* library start */}
               <Route path="history" element={<History />} />
               <Route path="songs" element={<MySongs />} />
+              <Route path="songs/song/:id" element={<Song />} />
               <Route path="albums" element={<MyAlbums />} />
+              <Route path="albums/album/:id" element={<Album />} />
               <Route path="playlists" element={<MyPlaylist />} />
+              <Route path="playlists/playlist/:id" element={<Playlist />} />
               {/* library end */}
               {/* single pages start */}
               <Route path="song/:id" element={<Song />} />
@@ -43,7 +46,7 @@ function App() {
               <Route path="playlist/:id" element={<Playlist />} />
               {/* single pages end */}
             </Route>
-            <Route path="*" element={<Error/>} />
+            <Route path="*" element={<Error />} />
           </Routes>
         </Router>
       </div>

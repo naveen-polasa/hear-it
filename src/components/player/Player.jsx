@@ -11,6 +11,7 @@ import {
 } from "../../features/playerSlice";
 import { SongDetails, SongControls, Download, Volume } from "./index";
 import { homeDataFetch } from "../../features/homeSlice";
+import { addLastPlayed } from "../../features/storageSlice";
 
 const Player = () => {
   const [mousedown, setMouseDown] = useState(false);
@@ -37,6 +38,14 @@ const Player = () => {
   }, [songId, type]);
 
   const { downloadUrl, name, primaryArtists, image } = currentSongData;
+
+  useEffect(() => {
+    if (!currentSongData.id) {
+      return;
+    }
+    dispatch(addLastPlayed(currentSongData));
+  }, [currentSongData]);
+
   useEffect(() => {
     if (!isPlaying) return;
     ref.current.play();

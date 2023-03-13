@@ -7,7 +7,7 @@ export const formatTime = (secs) => {
 };
 
 export const formatName = (name) => {
-  if (!name ) return;
+  if (!name) return;
   name = name.replaceAll("&#039;", "'");
   name = name.replaceAll("&amp;", "&");
   return name.replaceAll("&quot;", '"');
@@ -15,4 +15,17 @@ export const formatName = (name) => {
 
 export const formatNum = (num) => {
   return num ? num.toLocaleString() : null;
+};
+
+export const checkInLocalData = (id, name) => {
+  const localData = JSON.parse(localStorage.getItem(name));
+  const result = localData?.find((item) => item.id === id);
+  return result ? true : false;
+};
+
+export const removeItem = (id, name) => {
+  const localData = JSON.parse(localStorage.getItem(name));
+  const result = localData?.filter((item) => item.id !== id);
+  localStorage.setItem(name, JSON.stringify(result));
+  return result;
 };
