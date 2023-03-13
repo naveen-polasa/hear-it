@@ -4,6 +4,7 @@ import Loading from "../../utils/Loading";
 import NotFound from "../../utils/NotFound";
 const NewReleases = () => {
   const { albums, isLoading, isError } = useSelector((store) => store.home);
+
   if (isLoading) {
     return <Loading />;
   }

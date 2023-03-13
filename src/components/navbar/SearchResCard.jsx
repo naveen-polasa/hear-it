@@ -12,7 +12,7 @@ const SearchResCard = ({ songs, albums, topQuery, handlePlay }) => {
     <>
       {data?.results?.map((res) => {
         const { title, description, image, type, id } = res;
-        console.log(res);
+
         return (
           <div
             key={id}

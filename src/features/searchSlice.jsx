@@ -4,7 +4,10 @@ import { searchAllUrl } from "../utils/constants";
 
 const initialState = {
   searchVal: "",
+  isLoading: false,
+  isError: false,
   isActive: false,
+  isSearchActive: false,
   result: { topQuery: {}, albums: {}, songs: {} },
 };
 
@@ -32,22 +35,34 @@ const searchSlice = createSlice({
     },
     handleIsActive: (state, { payload }) => {
       state.isActive = payload;
+      state.isSearchActive = payload;
+    },
+    handleIsSearchActive: (state, { payload }) => {
+      state.isSearchActive = payload;
     },
   },
   extraReducers: (builder) => {
     builder
       .addCase(searchValFetch.pending, (state) => {
+        state.isError = false;
+        state.isLoading = true;
         state.result = initialState.result;
       })
       .addCase(searchValFetch.fulfilled, (state, { payload }) => {
+        state.isLoading = false;
+        state.isError = false;
         state.result = payload;
       })
       .addCase(searchValFetch.rejected, (state, { payload }) => {
+        state.isLoading = false;
+        state.isError = true;
         console.log(payload);
         state.result = initialState.result;
       });
   },
 });
 
-export const { setSearchVal, handleIsActive } = searchSlice.actions;
+          
+export const { setSearchVal, handleIsActive, handleIsSearchActive } =
+  searchSlice.actions;
 export default searchSlice.reducer;

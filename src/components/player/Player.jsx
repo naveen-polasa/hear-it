@@ -8,6 +8,7 @@ import {
   setVolume,
   setCurrentTime,
   playerSongFetch,
+  handleControls,
 } from "../../features/playerSlice";
 import { SongDetails, SongControls, Download, Volume } from "./index";
 import { homeDataFetch } from "../../features/homeSlice";
@@ -27,6 +28,7 @@ const Player = () => {
     volume,
     currentTime,
     progressBarWidth,
+    songNum,
   } = useSelector((store) => store.player);
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -99,6 +101,16 @@ const Player = () => {
     ref.current["volume"] = volume;
   };
 
+  const handleEnd = (e) => {
+    if (songsList.length === 1 || songsList.length - 1 === songNum) {
+      dispatch(handleIsPlaying(false));
+      ref.current.pause();
+    }
+    if (songsList.length > 1) {
+      dispatch(handleControls("next"));
+    }
+  };
+
   return (
     <section className="fixed bottom-0 h-20 bg-red-100 w-[100vw] max-w-[1440px] rounded-t-lg border-x-2 border-red-200 z-20">
       <audio
@@ -106,6 +118,7 @@ const Player = () => {
         ref={ref}
         type="audio/mp3"
         preload="metadata"
+        onEnded={handleEnd}
       ></audio>
       <div
         onClick={(e) => {

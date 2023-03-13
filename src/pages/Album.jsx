@@ -6,7 +6,6 @@ import NotFound from "../utils/NotFound";
 const Album = () => {
   const { isLoading, isError } = useSelector((store) => store.player);
 
-
   if (isLoading) {
     return <Loading />;
   }

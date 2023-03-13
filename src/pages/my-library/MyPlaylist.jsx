@@ -3,7 +3,6 @@ import PlaylistCard from "../../components/cards/PlaylistCard";
 
 const MyPlaylist = () => {
   const { playlists } = useSelector((store) => store.storage);
-  console.log(playlists)
   return (
     <section>
       <h3 className="py-6 px-8 text-2xl font-semibold">My Playlists</h3>

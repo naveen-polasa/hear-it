@@ -3,7 +3,6 @@ import MusicCard from "../../components/cards/MusicCard";
 
 const MySongs = () => {
  const { songs } = useSelector((store) => store.storage);
- console.log(songs)
  return (
    <section>
      <h3 className="py-6 px-8 text-2xl font-semibold">My Songs</h3>
