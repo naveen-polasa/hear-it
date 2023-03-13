@@ -19,6 +19,7 @@ const SearchResult = () => {
     const path = `${type}/${id}`;
     navigate(path);
   };
+
   useEffect(() => {
     if (!searchVal) return;
     dispatch(searchValFetch(searchVal));
@@ -29,7 +30,7 @@ const SearchResult = () => {
     return (
       <>
         <p className="text-xl py-2 font-semibold font-mono">Trending</p>
-        <SearchTrending />
+        <SearchTrending handlePlay={handlePlay} />
       </>
     );
   }

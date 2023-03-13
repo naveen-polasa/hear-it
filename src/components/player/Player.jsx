@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { formatTime } from "../../utils/utilFunctions";
-import { SlOptions } from "../../utils/icons";
+import { FaExpandAlt, SlOptions } from "../../utils/icons";
 import {
   handleIsPlaying,
   setProgressBarWidth,
@@ -12,6 +12,7 @@ import {
 import { SongDetails, SongControls, Download, Volume } from "./index";
 import { homeDataFetch } from "../../features/homeSlice";
 import { addLastPlayed } from "../../features/storageSlice";
+import { useNavigate } from "react-router-dom";
 
 const Player = () => {
   const [mousedown, setMouseDown] = useState(false);
@@ -28,7 +29,7 @@ const Player = () => {
     progressBarWidth,
   } = useSelector((store) => store.player);
   const dispatch = useDispatch();
-
+  const navigate = useNavigate();
   useEffect(() => {
     dispatch(homeDataFetch());
   }, []);
@@ -143,14 +144,22 @@ const Player = () => {
             </span>
             / <span>{formatTime(Math.floor(ref.current?.duration || 0))}</span>
           </span>
-          <button>
-            <SlOptions className="w-5 h-5 md:w-7 md:h-7" />
-          </button>
           <Download downloadUrl={downloadUrl} />
           <Volume
             handleVolume={handleVolume}
             handleVolumeChange={handleVolumeChange}
           />
+          {/* <button>
+            <SlOptions className="w-5 h-5 md:w-7 md:h-7" />
+          </button> */}
+          <button
+            onClick={() => {
+              const path = `${type}/${songId}`;
+              navigate(path);
+            }}
+          >
+            <FaExpandAlt className="w-5 h-5 md:w-7 md:h-7 hover:scale-110 duration-200" />
+          </button>
         </div>
       </div>
     </section>

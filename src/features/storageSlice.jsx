@@ -1,9 +1,10 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { checkInLocalData, removeItem } from "../utils/utilFunctions";
+import { removeItem, setUpHistory, setupStorage } from "../utils/utilFunctions";
 
 const initialState = {
   lastPlayed: {},
   songs: JSON.parse(localStorage.getItem("songs")) || [],
+  history: JSON.parse(localStorage.getItem("history")) || [],
   albums: JSON.parse(localStorage.getItem("albums")) || [],
   playlists: JSON.parse(localStorage.getItem("playlists")) || [],
 };
@@ -16,32 +17,36 @@ const storageSlice = createSlice({
       state.lastPlayed = payload;
       localStorage.setItem("lastPlayed", JSON.stringify(payload));
     },
+    addToHistory: (state, { payload }) => {
+      if (!payload) return;
+      state.history = setUpHistory(payload);
+    },
     addToStorage: (state, { payload }) => {
-      const { id, type } = payload;
-
+      const { type } = payload;
       switch (type) {
-        case "song": {
-          if (checkInLocalData(id, "songs")) return;
-          state.songs = [...state.songs, payload];
-          localStorage.setItem("songs", JSON.stringify(state.songs));
+        case "": {
+          state.songs = setupStorage(payload, "songs");
           return;
         }
+        case "song": {
+          state.songs = setupStorage(payload, "songs");
+        }
         case "album": {
-          if (checkInLocalData(id, "albums")) return;
-          state.albums = [...state.albums, payload];
-          localStorage.setItem("albums", JSON.stringify(state.albums));
+          state.albums = setupStorage(payload, "albums");
           return;
         }
         case "playlist": {
-          if (checkInLocalData(id, "playlists")) return;
-          state.playlists = [...state.playlists, payload];
-          localStorage.setItem("playlists", JSON.stringify(state.playlists));
+          state.playlists = setupStorage(payload, "playlists");
         }
       }
     },
     removeFromStorage: (state, { payload }) => {
       const { id, type } = payload;
       switch (type) {
+        case "": {
+          state.songs = removeItem(id, "songs");
+          return;
+        }
         case "song": {
           state.songs = removeItem(id, "songs");
           return;
@@ -58,6 +63,7 @@ const storageSlice = createSlice({
   },
 });
 
-export const { addLastPlayed, addToStorage, removeFromStorage } = storageSlice.actions;
+export const { addLastPlayed, addToHistory, addToStorage, removeFromStorage } =
+  storageSlice.actions;
 
 export default storageSlice.reducer;

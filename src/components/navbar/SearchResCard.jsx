@@ -1,6 +1,9 @@
+import { useDispatch } from "react-redux";
+import { addToHistory } from "../../features/storageSlice";
 import { formatName } from "../../utils/utilFunctions";
 
 const SearchResCard = ({ songs, albums, topQuery, handlePlay }) => {
+  const dispatch = useDispatch();
   let data = [];
   if (songs) data = songs;
   else if (albums) data = albums;
@@ -9,6 +12,7 @@ const SearchResCard = ({ songs, albums, topQuery, handlePlay }) => {
     <>
       {data?.results?.map((res) => {
         const { title, description, image, type, id } = res;
+        console.log(res);
         return (
           <div
             key={id}
@@ -18,6 +22,7 @@ const SearchResCard = ({ songs, albums, topQuery, handlePlay }) => {
             onClick={() => {
               if (type !== "artist") {
                 handlePlay(id, type);
+                dispatch(addToHistory(res));
               }
             }}
           >

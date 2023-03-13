@@ -1,22 +1,11 @@
 import { useDispatch, useSelector } from "react-redux";
-import { useNavigate } from "react-router-dom";
-import { handleIsPlaying, playSong } from "../../features/playerSlice";
-import { handleIsActive } from "../../features/searchSlice";
+import { addToHistory } from "../../features/storageSlice";
 import { formatName } from "../../utils/utilFunctions";
 
-const SearchTrending = () => {
+const SearchTrending = ({ handlePlay }) => {
   const { trending } = useSelector((store) => store.home);
   const dispatch = useDispatch();
-
   const { songs, albums } = trending;
-  const navigate = useNavigate();
-
-  const handlePlay = (id, type) => {
-    dispatch(playSong({ id, type }));
-    dispatch(handleIsPlaying(false));
-    const path = `${type}/${id}`;
-    navigate(path);
-  };
 
   return (
     <article className="grid md:grid-cols-2 lg:grid-cols-3 gap-x-2 gap-y-3 pb-5 pt-2 flex-wrap shrink-0 overflow-x-hidden overflow-y-scroll scrollbar h-[calc(100vh-13rem)] md:h-fit">
@@ -29,6 +18,7 @@ const SearchTrending = () => {
             onClick={() => {
               if (type !== "artist") {
                 handlePlay(id, type);
+                dispatch(addToHistory({ ...song }));
               }
             }}
           >
@@ -58,6 +48,7 @@ const SearchTrending = () => {
             onClick={() => {
               if (type !== "artist") {
                 handlePlay(id, type);
+                dispatch(addToHistory({ ...album }));
               }
             }}
           >

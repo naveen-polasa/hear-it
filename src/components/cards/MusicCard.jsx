@@ -5,7 +5,16 @@ const MusicCard = ({ data }) => {
   return (
     <article className="flex justify-center flex-wrap shrink-0 gap-x-1 gap-y-6 sm:gap-8">
       {data?.map((item) => {
-        const { id, name, primaryArtists, artists, type, songCount } = item;
+        const {
+          id,
+          name,
+          primaryArtists,
+          artists,
+          type,
+          songCount,
+          title,
+          subtitle,
+        } = item;
 
         return (
           <div key={id} className="w-44 relative">
@@ -14,14 +23,15 @@ const MusicCard = ({ data }) => {
               <div className="py-2 text-center px-0.5 ">
                 <p className="truncate font-semibold">{formatName(name)}</p>
                 <p className="truncate text-xs">
-                  {primaryArtists?.map((artist, index) => {
-                    return (
-                      <span key={index} className="text-sm">
-                        {" "}
-                        {formatName(artist.name)}
-                      </span>
-                    );
-                  })}
+                  {!primaryArtists &&
+                    primaryArtists?.map((artist, index) => {
+                      return (
+                        <span key={index} className="text-sm">
+                          {" "}
+                          {formatName(artist.name)}
+                        </span>
+                      );
+                    })}
                   {artists?.map((artist, index) => {
                     return (
                       <span key={index} className="text-sm">
@@ -30,12 +40,26 @@ const MusicCard = ({ data }) => {
                       </span>
                     );
                   })}
-                  {type === "playlist" && (
-                    <span className="text-sm ">
+                  {type === "playlist" && !title && (
+                    <span className="text-sm font-mono">
                       PlayList Songs : {songCount}
                     </span>
                   )}
                 </p>
+                {title && subtitle && (
+                  <div className="py-2 text-center px-0.5 ">
+                    <p className="truncate font-semibold">
+                      {title ? formatName(title) : formatName(name)}
+                    </p>
+                    <p className="truncate text-sm font-mono">
+                      {subtitle ? (
+                        formatName(subtitle)
+                      ) : (
+                        <span>PlayList Songs : {songCount}</span>
+                      )}
+                    </p>
+                  </div>
+                )}
               </div>
             </div>
           </div>

@@ -1,6 +1,14 @@
+import { useSelector } from "react-redux";
+import MusicCard from "../../components/cards/MusicCard";
+
 const History = () => {
+  const { history } = useSelector((store) => store.storage);
+  console.log(history)
   return (
-    <div>History</div>
-  )
-}
-export default History
+    <section>
+      <h3 className="py-6 px-8 text-2xl font-semibold">My History</h3>
+      <MusicCard data={history} />
+    </section>
+  );
+};
+export default History;

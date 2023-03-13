@@ -33,6 +33,9 @@ function App() {
               {/* browse end */}
               {/* library start */}
               <Route path="history" element={<History />} />
+              <Route path="history/song/:id" element={<Song />} />
+              <Route path="history/album/:id" element={<Album />} />
+              <Route path="history/playlist/:id" element={<Playlist />} />
               <Route path="songs" element={<MySongs />} />
               <Route path="songs/song/:id" element={<Song />} />
               <Route path="albums" element={<MyAlbums />} />

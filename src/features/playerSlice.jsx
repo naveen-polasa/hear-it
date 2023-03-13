@@ -43,7 +43,6 @@ const playerSlice = createSlice({
       if(state.id === id) return 
       state.id = id;
       state.type = type;
-      console.log('play song')
     },
     handleIsPlaying: (state, { payload }) => {
       state.isPlaying = payload;
