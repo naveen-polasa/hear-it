@@ -16,7 +16,9 @@ const TopPlaylists = () => {
 
   return (
     <section>
-      <h3 className="py-6 px-8 text-2xl font-semibold">Top Playlists</h3>
+      <h3 className="py-3 md:py-6 px-8 text-2xl font-semibold">
+        Top Playlists
+      </h3>
       <PlaylistCard data={playlists} />
     </section>
   );

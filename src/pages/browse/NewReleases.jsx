@@ -13,8 +13,8 @@ const NewReleases = () => {
     return <NotFound />;
   }
   return (
-    <section>
-      <h3 className="py-6 px-8 text-2xl font-semibold">New Songs</h3>
+    <section className="overflow-x-hidden">
+      <h3 className="py-3 md:py-6 px-8 text-2xl font-semibold">New Songs</h3>
       <MusicCard data={albums} />
     </section>
   );

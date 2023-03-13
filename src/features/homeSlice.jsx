@@ -11,6 +11,7 @@ const initialState = {
   isLoading: false,
   isError: false,
   play: null,
+  menu: false,
 };
 
 export const homeDataFetch = createAsyncThunk(
@@ -29,7 +30,16 @@ export const homeDataFetch = createAsyncThunk(
 const homeSlice = createSlice({
   name: "homeSlice",
   initialState,
-  reducers: {},
+  reducers: {
+    handleMenu: (state, { payload }) => {
+      if (payload === "open") {
+        state.menu = true;
+        return;
+      } else {
+        state.menu = false;
+      }
+    },
+  },
   extraReducers: (builder) => {
     builder
       .addCase(homeDataFetch.pending, (state) => {
@@ -50,7 +60,7 @@ const homeSlice = createSlice({
         };
       })
       .addCase(homeDataFetch.rejected, (state, { payload }) => {
-        console.log(payload)
+        console.log(payload);
         console.log(payload);
         state.isLoading = false;
         state.isError = true;
@@ -58,6 +68,6 @@ const homeSlice = createSlice({
   },
 });
 
-export const {} = homeSlice.actions;
+export const { handleMenu } = homeSlice.actions;
 
 export default homeSlice.reducer;

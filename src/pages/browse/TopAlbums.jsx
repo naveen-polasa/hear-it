@@ -17,7 +17,7 @@ const TopAlbums = () => {
 
   return (
     <section>
-      <h3 className="py-6 px-8 text-2xl font-semibold">Top Albums</h3>
+      <h3 className="py-3 md:py-6 px-8 text-2xl font-semibold">Top Albums</h3>
       <MusicCard data={albums} />
     </section>
   );

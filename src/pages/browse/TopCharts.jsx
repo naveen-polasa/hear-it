@@ -16,7 +16,9 @@ const TopCharts = () => {
 
   return (
     <section>
-      <h3 className="py-6 px-8 text-2xl font-semibold">Top Music Charts</h3>
+      <h3 className="py-3 md:py-6 px-8 text-2xl font-semibold">
+        Top Music Charts
+      </h3>
       <MusicChartCard data={charts} />
     </section>
   );

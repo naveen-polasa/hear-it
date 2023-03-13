@@ -3,7 +3,7 @@ import ImageCard from "./ImageCard";
 
 const MusicCard = ({ data }) => {
   return (
-    <article className="flex justify-center flex-wrap shrink-0 gap-x-1 gap-y-6 sm:gap-8">
+    <article className="flex justify-around sm:justify-center flex-wrap shrink-0 gap-x-2 gap-y-6 sm:gap-8">
       {data?.map((item) => {
         const {
           id,
@@ -17,7 +17,7 @@ const MusicCard = ({ data }) => {
         } = item;
 
         return (
-          <div key={id} className="w-44 relative">
+          <div key={id} className="w-44 mt-1 relative">
             <div>
               <ImageCard item={item} height="11" width="44" />
               <div className="py-2 text-center px-0.5 ">
