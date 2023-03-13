@@ -11,7 +11,7 @@ const initialState = {
   currentSongData: {},
   isLoading: false,
   isError: false,
-  id: JSON.parse(localStorage.getItem("lastPlayed"))?.id || "Hpd68_cZ",
+  id: JSON.parse(localStorage.getItem("lastPlayed"))?.id || "j8hvJDPs",
   type: JSON.parse(localStorage.getItem("lastPlayed"))?.type || "song",
   songsList: [],
   songNum: 0,
@@ -40,7 +40,7 @@ const playerSlice = createSlice({
   reducers: {
     playSong: (state, { payload }) => {
       const { id, type } = payload;
-      if(state.id === id) return 
+      if (state.id === id) return;
       state.id = id;
       state.type = type;
     },
