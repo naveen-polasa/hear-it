@@ -8,7 +8,7 @@ const Error = () => {
       </h3>
       <button
         className="my-4 font-mono font-semibold
-      text-xl text-white border-2 px-5 py-2 rounded-xl bg-red-300 hover:scale-105 duration-200"
+      text-xl text-white border-2 px-5 py-2 rounded-xl bg-red-400 hover:scale-105 duration-200"
       >
         <Link to="/">Go To Home</Link>
       </button>

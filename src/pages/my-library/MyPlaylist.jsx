@@ -10,8 +10,8 @@ const MyPlaylist = () => {
 
   return (
     <section>
-      <div className="flex items-center justify-between">
-        <h3 className="py-3 md:py-6 px-8 text-2xl font-semibold">
+      <div className="flex items-center justify-between mb-3 sm:mb-0">
+        <h3 className="py-3 md:py-6 px-8 sm:text-2xl font-semibold">
           My Playlists
         </h3>
         {playlists.length > 0 && (
@@ -25,11 +25,7 @@ const MyPlaylist = () => {
           </button>
         )}
       </div>
-      {!playlists.length ? (
-        <EmptyList />
-      ) : (
-        <PlaylistCard data={playlists} />
-      )}
+      {!playlists.length ? <EmptyList /> : <PlaylistCard data={playlists} />}
     </section>
   );
 };
