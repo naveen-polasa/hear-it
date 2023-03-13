@@ -30,6 +30,7 @@ const storageSlice = createSlice({
         }
         case "song": {
           state.songs = setupStorage(payload, "songs");
+          return;
         }
         case "album": {
           state.albums = setupStorage(payload, "albums");
