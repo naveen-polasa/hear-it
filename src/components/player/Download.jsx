@@ -22,20 +22,21 @@ const Download = ({ downloadUrl }) => {
           {downloadUrl ? (
             downloadUrl?.map((url) => {
               return (
-                <div
+                <a
+                  href={url.link}
+                  download
+                  target="_blank"
                   key={url.quality}
-                  className="flex gap-x-4 w-[6.5rem] my-2 justify-between border rounded-lg p-0.5"
+                  className="flex gap-x-4 w-[6.5rem] my-2 justify-between border rounded-lg px-2"
                 >
-                  <p>{url.quality}</p>
+                  <p className="text-sm">{url.quality}</p>
                   <span>
-                    <a href={url.link} target="_blank">
-                      <HiDownload
-                        size="24px"
-                        className="hover:scale-125 duration-200"
-                      />
-                    </a>
+                    <HiDownload
+                      size="24px"
+                      className="hover:scale-125 duration-200"
+                    />
                   </span>
-                </div>
+                </a>
               );
             })
           ) : (

@@ -60,10 +60,19 @@ const storageSlice = createSlice({
         }
       }
     },
+    clearFromStorage: (state, { payload }) => {
+      localStorage.removeItem(payload);
+      state[payload] = [];
+    },
   },
 });
 
-export const { addLastPlayed, addToHistory, addToStorage, removeFromStorage } =
-  storageSlice.actions;
+export const {
+  addLastPlayed,
+  addToHistory,
+  addToStorage,
+  removeFromStorage,
+  clearFromStorage,
+} = storageSlice.actions;
 
 export default storageSlice.reducer;

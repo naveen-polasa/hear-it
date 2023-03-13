@@ -14,6 +14,8 @@ const MusicCard = ({ data }) => {
           songCount,
           title,
           subtitle,
+          singers,
+          artist,
         } = item;
 
         return (
@@ -22,8 +24,11 @@ const MusicCard = ({ data }) => {
               <ImageCard item={item} height="11" width="44" />
               <div className="py-2 text-center px-0.5 ">
                 <p className="truncate font-semibold">{formatName(name)}</p>
+                <p className="truncate ">
+                  {type === "" && `${formatName(primaryArtists)}`}
+                </p>
                 <p className="truncate text-xs">
-                  {!primaryArtists &&
+                  {typeof primaryArtists !== 'string' &&
                     primaryArtists?.map((artist, index) => {
                       return (
                         <span key={index} className="text-sm">
@@ -46,6 +51,28 @@ const MusicCard = ({ data }) => {
                     </span>
                   )}
                 </p>
+
+                {title && singers && (
+                  <div className="py-2 text-center px-0.5 ">
+                    <p className="truncate font-semibold">
+                      {title ? formatName(title) : formatName(name)}
+                    </p>
+                    <p className="truncate text-sm font-mono">
+                      {singers && formatName(singers)}
+                    </p>
+                  </div>
+                )}
+                {title && artist && (
+                  <div className="py-2 text-center px-0.5 ">
+                    <p className="truncate font-semibold">
+                      {title ? formatName(title) : formatName(name)}
+                    </p>
+                    <p className="truncate text-sm font-mono">
+                      {artist && formatName(artist)}
+                    </p>
+                  </div>
+                )}
+
                 {title && subtitle && (
                   <div className="py-2 text-center px-0.5 ">
                     <p className="truncate font-semibold">
