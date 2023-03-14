@@ -44,10 +44,10 @@ const SearchResult = () => {
   const { topQuery, songs, albums } = result;
 
   if (isLoading) {
-    return <Loading />;
+    return <Loading height="h-44" />;
   }
   if (searchError) {
-    return <NotFound />;
+    return <NotFound height="h-44" />;
   }
 
   return (
