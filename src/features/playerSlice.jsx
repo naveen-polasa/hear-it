@@ -1,5 +1,6 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
+import { baseURL } from "../utils/constants";
 
 const initialState = {
   isPlaying: false,
@@ -23,8 +24,7 @@ export const playerSongFetch = createAsyncThunk(
   "playerData",
   async ({ songId, type }, thunkAPI) => {
     try {
-      // const url = `https://saavn.me/${thunkAPI.getState().player.type}s?id=${thunkAPI.getState().player.id}`;
-      const url = `https://saavn.me/${type}s?id=${songId}`;
+      const url = `${baseURL}${type}s?id=${songId}`;
       const { data: resp } = await axios(url);
       const { data } = resp;
       return data;

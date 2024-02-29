@@ -32,7 +32,7 @@ const Download = ({ downloadUrl }) => {
                   <p className="text-sm">{url.quality}</p>
                   <span>
                     <HiDownload
-                      size="24px"
+                      size="24px" 
                       className="hover:scale-125 duration-200"
                     />
                   </span>

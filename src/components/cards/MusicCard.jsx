@@ -19,7 +19,7 @@ const MusicCard = ({ data }) => {
         } = item;
 
         return (
-          <div key={id} className="w-44 mt-1 relative">
+          <div key={id} className="w-40 sm:w-44 mt-1 relative">
             <div>
               <ImageCard item={item} height="11" width="44" />
               <div className="py-2 text-center px-0.5 ">
@@ -28,7 +28,7 @@ const MusicCard = ({ data }) => {
                   {type === "" && `${formatName(primaryArtists)}`}
                 </p>
                 <p className="truncate text-xs">
-                  {typeof primaryArtists !== 'string' &&
+                  {typeof primaryArtists !== "string" &&
                     primaryArtists?.map((artist, index) => {
                       return (
                         <span key={index} className="text-sm">
